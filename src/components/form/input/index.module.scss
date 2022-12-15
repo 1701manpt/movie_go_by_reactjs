@@ -1,0 +1,31 @@
+@import '../../../styles/variables.scss';
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+
+    &+.wrapper {
+        margin-top: 16px;
+    }
+}
+
+.label {
+    margin-bottom: 8px;
+}
+
+.input {
+    padding: 16px;
+    border-radius: $border-radius;
+    border: 1px solid #868F96;
+    outline: none;
+
+    &:focus {
+        border: 1px solid #00E3AE;
+        caret-color: #00E3AE;
+    }
+}
+
+.error {
+    color: #FF4E00;
+    min-height: 1.4rem;
+}

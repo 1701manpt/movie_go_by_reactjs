@@ -1,0 +1,26 @@
+@import '../../styles/variables.scss';
+
+.wrapper {
+    background-image: linear-gradient(-135deg, #f5f7fa 10%, #c3cfe2 100%);
+    padding: 16px;
+    border-radius: $border-radius;
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+    width: 380px;
+}
+
+.title {
+    color: #2A5298;
+    font-size: 1.5em;
+    padding-bottom: 16px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #FDFBFB;
+}
+
+.content {
+    margin: 16px 0;
+}
+
+.action {
+    width: 100%;
+    margin-top: 32px;
+}

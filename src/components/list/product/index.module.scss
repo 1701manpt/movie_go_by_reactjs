@@ -1,0 +1,46 @@
+@import '../../../styles/variables.scss';
+
+.wrapper {
+    background-color: white;
+    padding: 8px;
+
+    // coppy from shopee 
+    box-shadow: 0 0.0625rem 0.125rem 0 rgb(0 0 0 / 10%);
+    border-radius: $border-radius;
+    color: rgba(0, 0, 0, .87);
+    border: 1px solid transparent;
+
+    &:hover {
+        color: $color-path;
+    }
+}
+
+.name {
+    margin: 8px 0;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    max-height: calc(1.4em * 3);
+}
+
+.price {
+    margin: 8px 0;
+    color: #FF4E00;
+}
+
+.description {
+    display: none;
+}
+
+.image {
+    width: 100%;
+    height: 180px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    // coppy from shopee
+    box-shadow: 0 0.0625rem 0.125rem 0 rgb(0 0 0 / 10%);
+    border-radius: $border-radius;
+}
