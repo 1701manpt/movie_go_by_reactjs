@@ -8,14 +8,15 @@
     left: 0;
     right: 0;
     height: 84px;
-    z-index: 1;
     display: grid;
     grid-template-columns: 240px 1fr 240px;
     gap: 32px;
+    box-shadow: $box-shadow;
+    z-index: 100;
 }
 
 .logo {
-    background-image: linear-gradient(135deg, #f5f7fa 10%, #c3cfe2 100%);
+    background-image: linear-gradient(45deg, #c3cfe2 10%, #f5f7fa 100%);
     padding: 8px;
     width: 240px;
     height: 100%;
@@ -36,6 +37,7 @@
     padding: 8px;
     text-transform: uppercase;
     border-radius: 999rem;
+    box-shadow: $box-shadow;
 
     &:hover {
         cursor: pointer;
@@ -55,4 +57,5 @@
     padding: 4px;
     border-radius: 999em;
     background-image: linear-gradient(135deg, #f5f7fa 10%, #c3cfe2 100%);
+    box-shadow: $box-shadow;
 }

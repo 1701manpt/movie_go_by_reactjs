@@ -6,6 +6,7 @@
     width: 100%;
     height: fit-content;
     padding: 16px;
+    box-shadow: $box-shadow;
     border-radius: $border-radius;
 
     &+.wrapper {

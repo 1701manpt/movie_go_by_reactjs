@@ -1,33 +1,28 @@
-import Head from "next/head"
-import { useEffect, useState } from "react"
+// reactjs
+import { useEffect } from "react"
 
+// nextjs
+import Head from "next/head"
+
+// redux
 import { useDispatch, useSelector } from "react-redux"
+import { getAll } from "../../redux/callApi/order"
+
+// layouts
 import Layout from "../../layouts"
-import { setToken } from "../../slices/auth"
 
 function Order() {
 
     const dispatch = useDispatch()
-    const [orders, setOrders] = useState([])
 
-    dispatch(setToken())
 
-    const { token } = useSelector((state) => state.auth)
-
-    const getOrders = async () => {
-        try {
-            const res = await fetch(`http://localhost:7000/api/customers/1/orders`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': token
-                }
-            })
-            const data = await res.json()
-            if (data.affectedRows >= 1) {
-                setOrders(data.data)
-            }
-        } catch (err) { }
+    const getOrders = () => {
+        dispatch(getAll())
     }
+
+    const { loading, error, data } = useSelector((state) => state.order)
+
+    console.log(data);
 
     useEffect(() => {
         getOrders()
@@ -42,10 +37,13 @@ function Order() {
             </Head>
             <Layout>
                 Order:
+
                 {
-                    orders?.map((order, index) => (
-                        <div key={index}>{JSON.stringify(order)}</div>
-                    ))
+                    loading
+                        ? <div>loading....</div>
+                        : data?.data?.map((order, index) => (
+                            <div key={index}>{JSON.stringify(order)}</div>
+                        ))
                 }
             </Layout>
         </>

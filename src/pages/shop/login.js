@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 
 // redux
 import { useDispatch, useSelector } from "react-redux"
-import { login } from "../../slices/customer"
+import { login } from "../../redux/callApi/customer"
 
 // layouts
 import Layout from '../../layouts'

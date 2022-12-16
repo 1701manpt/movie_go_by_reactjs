@@ -1,10 +1,37 @@
+// reactjs
+import { useEffect } from 'react'
+
+// nextjs
 import Head from 'next/head'
+
+// components
 import CategoryItem from '../../components/list/category'
 import List from '../../components/list'
 import Section, { SectionContent, SectionTitle } from '../../components/section'
+import ProductItem from '../../components/list/product'
+
+// layouts
 import Layout from '../../layouts'
 
+// redux
+import { useDispatch, useSelector } from 'react-redux'
+import { getAll } from '../../redux/callApi/product'
+
 export default function Home() {
+
+    const dispatch = useDispatch()
+    const { loading, error, data } = useSelector((state) => state.product)
+
+    const productListTopTrending = data?.data
+
+    const getProducts = () => {
+        dispatch(getAll())
+    }
+
+    useEffect(() => {
+        getProducts()
+    }, [])
+
     return (
         <>
             <Head>
@@ -19,16 +46,30 @@ export default function Home() {
                         <List data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} item={CategoryItem} />
                     </SectionContent>
                 </Section>
-                <Section>
-                    <SectionTitle>Sản phẩm thịnh hành</SectionTitle>
+                <Section
+                    style={{ backgroundImage: 'linear-gradient(135deg, #FF4E00 15%, #FFFFFF 0%)' }}
+                >
+                    <SectionTitle style={{ color: '#FFFFFF' }}>Sản phẩm thịnh hành</SectionTitle>
                     <SectionContent>
-
+                        <List
+                            data={productListTopTrending}
+                            item={ProductItem}
+                            styleOfItem={{ backgroundImage: 'linear-gradient(135deg, #dfe9f3 10%, #ffffff 100%)' }}
+                        />
                     </SectionContent>
                 </Section>
-                <Section>
-                    <SectionTitle>Sản phẩm ưu đãi</SectionTitle>
+                <Section
+                    style={{
+                        backgroundImage: 'linear-gradient(135deg, #FCCF31 10%, #ffffff 100%)'
+                    }}
+                >
+                    <SectionTitle style={{ color: '#E80505' }}>Sản phẩm ưu đãi</SectionTitle>
                     <SectionContent>
-
+                        <List
+                            style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}
+                            data={productListTopTrending}
+                            item={ProductItem}
+                        />
                     </SectionContent>
                 </Section>
             </Layout >

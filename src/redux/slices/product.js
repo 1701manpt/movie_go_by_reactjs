@@ -1,26 +1,11 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
+import { getAll } from "../callApi/product"
 
 const initialState = {
     loading: false,
     error: null,
     data: null,
 }
-
-export const getAll = createAsyncThunk(
-    'product/getAll',
-    async (body, thunkAPI) => {
-        const res = await fetch(`http://localhost:7000/api/products`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
-        const data = await res.json()
-
-        return data
-    }
-)
 
 export const productSlice = createSlice({
     name: "product",

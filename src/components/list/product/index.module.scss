@@ -1,6 +1,7 @@
 @import '../../../styles/variables.scss';
 
 .wrapper {
+    position: relative;
     background-color: white;
     padding: 8px;
 
@@ -8,10 +9,19 @@
     box-shadow: 0 0.0625rem 0.125rem 0 rgb(0 0 0 / 10%);
     border-radius: $border-radius;
     color: rgba(0, 0, 0, .87);
-    border: 1px solid transparent;
+    border: 2px solid transparent;
 
     &:hover {
         color: $color-path;
+        border: 2px solid #DE4313;
+
+        & .price {
+            color: red;
+        }
+
+        & .action {
+            display: flex;
+        }
     }
 }
 
@@ -43,4 +53,26 @@
     // coppy from shopee
     box-shadow: 0 0.0625rem 0.125rem 0 rgb(0 0 0 / 10%);
     border-radius: $border-radius;
+}
+
+.action {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: calc(-1.4rem - 8px * 2 + 0.8em / 2);
+    right: -2px;
+    left: -2px;
+    padding: 8px;
+    font-size: 0.8em;
+    background-color: #DE4313;
+    color: whitesmoke;
+    border-radius: 0 0 999rem 999rem;
+    box-shadow: $box-shadow;
+    border: 1px solid #DE4313;
+    z-index: 1;
+
+    &:hover {
+        cursor: pointer;
+    }
 }

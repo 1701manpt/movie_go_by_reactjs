@@ -4,7 +4,7 @@ import Layout from '../../layouts'
 
 // redux
 import { useDispatch, useSelector } from 'react-redux'
-import { register } from '../../slices/customer'
+import { register } from '../../redux/callApi/customer'
 
 function Login() {
 

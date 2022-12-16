@@ -5,14 +5,14 @@ import { useEffect, useState } from "react"
 import CategoryItem from "../../../components/sidebar/category"
 import List from "../../../components/list"
 import ProductItem from "../../../components/list/product"
+import Section, { SectionContent } from "../../../components/section"
 
 // layouts
 import SidebarLayout from "../../../layouts/sidebarLayout"
 
 // redux
 import { useDispatch, useSelector } from "react-redux"
-import { getAll } from "../../../slices/product"
-import Section, { SectionContent } from "../../../components/section"
+import { getAll } from "../../../redux/callApi/product"
 
 
 function ListProduct() {
@@ -36,12 +36,20 @@ function ListProduct() {
                 <link rel="icon" href="/product.png" />
             </Head>
             <SidebarLayout title="Danh mục" data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} item={CategoryItem}>
-                <Section>
+                <Section style={{ backgroundImage: 'linear-gradient(135deg, #9796f0 10%, #FBC7D4 100%)' }}>
                     <SectionContent>
                         {
                             loading
                                 ? <div>loading...</div>
-                                : data?.affectedRows >= 1 && <List data={data?.data} item={ProductItem} />
+                                : data?.affectedRows >= 1
+                                    ? (
+                                        <List
+                                            data={data?.data}
+                                            item={ProductItem}
+                                            style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}
+                                        />
+                                    )
+                                    : <div>Không có sản phẩm</div>
                         }
                     </SectionContent>
                 </Section>

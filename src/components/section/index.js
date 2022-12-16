@@ -1,8 +1,8 @@
 import styles from './index.module.scss'
 
-export const SectionTitle = ({ children }) => {
+export const SectionTitle = ({ children, ...args }) => {
     return (
-        <div className={styles.title}>
+        <div className={styles.title} {...args}>
             {children}
         </div>
     )
@@ -16,9 +16,9 @@ export const SectionContent = ({ children }) => {
     )
 }
 
-function Section({ children }) {
+function Section({ children, ...args }) {
     return (
-        <section className={styles.wrapper}>
+        <section className={styles.wrapper} {...args}>
             {children}
         </section>
     )
