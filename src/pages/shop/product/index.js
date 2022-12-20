@@ -14,7 +14,6 @@ import SidebarLayout from "../../../layouts/sidebarLayout"
 import { useDispatch, useSelector } from "react-redux"
 import { getAll } from "../../../redux/callApi/product"
 
-
 function ListProduct() {
 
     const dispatch = useDispatch()

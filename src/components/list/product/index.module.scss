@@ -67,7 +67,7 @@
     font-size: 0.8em;
     background-color: #DE4313;
     color: whitesmoke;
-    border-radius: 0 0 999rem 999rem;
+    border-radius: 0 0 $border-radius $border-radius;
     box-shadow: $box-shadow;
     border: 1px solid #DE4313;
     z-index: 1;

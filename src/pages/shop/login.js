@@ -1,5 +1,5 @@
 // reactjs
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // nextjs
 import Head from 'next/head'
@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 
 // redux
 import { useDispatch, useSelector } from "react-redux"
-import { login } from "../../redux/callApi/customer"
+import { login } from "../../redux/callApi/auth"
 
 // layouts
 import Layout from '../../layouts'
@@ -22,9 +22,12 @@ function Login() {
 
     const router = useRouter()
     const dispatch = useDispatch()
-    const { loading, data, error } = useSelector((state) => state.customer)
+    const user = useSelector((state) => state.auth.login.currentUser)
+    const validation = useSelector((state) => state.auth.login.validation)
+    const message = useSelector((state) => state.auth.login.message)
 
     const [state, setState] = useState({})
+    const [toggleError, setToggleError] = useState(false)
 
     const onChangeState = (e) => {
         setState({
@@ -35,10 +38,15 @@ function Login() {
 
     const handleLogin = () => {
         dispatch(login(state))
+        setToggleError(true)
     }
 
-    if (data?.affectedRows >= 1) {
-        router.push('/shop/order')
+    useEffect(() => {
+        setToggleError(false)
+    }, [state])
+
+    if (user) {
+        router.push('/shop')
     }
 
     return (
@@ -49,31 +57,34 @@ function Login() {
                 <link rel="icon" href="/login.png" />
             </Head>
             <Layout>
-                <Form>
-                    <FormTitle>Đăng nhập</FormTitle>
-                    <FormContent>
-                        <Input
-                            label="Tài khoản"
-                            type="text"
-                            name="account"
-                            placeholder="Enter your account"
-                            onChange={(e) => { onChangeState(e) }}
-                            error={data?.error || null}
-                        />
-                        <Input
-                            label="Mật khẩu"
-                            type="password"
-                            name="password"
-                            placeholder="Enter your password"
-                            onChange={(e) => { onChangeState(e) }}
-                            error={data?.error || null}
-                        />
-                    </FormContent>
-                    <FormAction>
-                        <Button type="submit" onClick={handleLogin}>Login</Button>
-                        <Link href="/shop/register">Đi đến đăng ký</Link>
-                    </FormAction>
-                </Form>
+                <div>
+                    {toggleError && <div style={{ color: 'red', minHeight: '1.4rem' }}>{message}</div>}
+                    <Form>
+                        <FormTitle>Đăng nhập</FormTitle>
+                        <FormContent>
+                            <Input
+                                label="Tài khoản"
+                                type="text"
+                                name="account"
+                                placeholder="Enter your account"
+                                onChange={(e) => { onChangeState(e) }}
+                                error={validation || null}
+                            />
+                            <Input
+                                label="Mật khẩu"
+                                type="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                onChange={(e) => { onChangeState(e) }}
+                                error={validation || null}
+                            />
+                        </FormContent>
+                        <FormAction>
+                            <Button type="submit" onClick={handleLogin}>Login</Button>
+                            <Link href="/shop/register">Đi đến đăng ký</Link>
+                        </FormAction>
+                    </Form>
+                </div>
             </Layout>
         </>
     )

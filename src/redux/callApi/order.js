@@ -1,21 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import Cookies from "js-cookie"
+import axios from "../../config/axios"
+import axiosPrivate from "../../hooks/useRefreshToken"
 
 export const getAll = createAsyncThunk(
     'order/getAll',
-    async (body, thunkAPI) => {
-        const token = Cookies.get('token')
-
-        const res = await fetch(`http://localhost:7000/api/customers/1/orders`, {
+    async (data, thunkAPI) => {
+        const res = await axiosPrivate({
             method: 'GET',
+            url: `/customers/${data.id}/orders`,
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': token
+                token: `Bearer ${data.accessToken}`,
             }
         })
 
-        const data = await res.json()
-
-        return data
+        return res.data
     }
 )

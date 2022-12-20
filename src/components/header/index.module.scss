@@ -53,9 +53,24 @@
     justify-content: center;
 }
 
-.login {
+.iconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &+.iconContainer {
+        margin-left: 8px;
+    }
+}
+
+.icon {
     padding: 4px;
-    border-radius: 999em;
+    border-radius: 999rem;
     background-image: linear-gradient(135deg, #f5f7fa 10%, #c3cfe2 100%);
-    box-shadow: $box-shadow;
+    box-shadow: $box-shadow-3d;
+    border: 1px solid transparent;
+
+    &:hover {
+        border: 1px solid #667eea;
+    }
 }

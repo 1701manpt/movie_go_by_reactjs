@@ -4,12 +4,12 @@ import Layout from '../../layouts'
 
 // redux
 import { useDispatch, useSelector } from 'react-redux'
-import { register } from '../../redux/callApi/customer'
+import { register } from '../../redux/callApi/auth'
 
-function Login() {
+function Register() {
 
     const dispatch = useDispatch()
-    const { loading, data, error } = useSelector((state) => state.customer)
+    const success = useSelector((state) => state.auth.register?.success)
     const [state, setState] = useState({})
 
     const onChangeState = (e) => {
@@ -31,7 +31,8 @@ function Login() {
                 <link rel="icon" href="/register.png" />
             </Head>
             <Layout>
-                <span><code><hr />{data?.error[0]?.msg}<hr /></code></span>
+                {/* <span><code><hr />{data?.error[0]?.msg}<hr /></code></span> */}
+                <div>{success}</div>
                 <br /><input type="text" placeholder="Enter your account" name="account" onChange={(e) => { onChangeState(e) }} />
                 <br /><input type="password" placeholder="Enter your password" name="password" onChange={(e) => { onChangeState(e) }} />
                 <br /><input type="password" placeholder="Enter your confirm password" name="confirmPassword" onChange={(e) => { onChangeState(e) }} />
@@ -45,4 +46,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Register

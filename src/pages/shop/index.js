@@ -17,7 +17,7 @@ import Layout from '../../layouts'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAll } from '../../redux/callApi/product'
 
-export default function Home() {
+export default function Shop() {
 
     const dispatch = useDispatch()
     const { loading, error, data } = useSelector((state) => state.product)
@@ -66,7 +66,7 @@ export default function Home() {
                     <SectionTitle style={{ color: '#E80505' }}>Sản phẩm ưu đãi</SectionTitle>
                     <SectionContent>
                         <List
-                            style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}
+                            style={{ gridTemplateColumns: 'repeat(6, 1fr)' }}
                             data={productListTopTrending}
                             item={ProductItem}
                         />

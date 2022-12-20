@@ -1,35 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
+import axios from "../../config/axios"
 
-export const login = createAsyncThunk(
-    'customer/login',
-    async (body, thunkAPI) => {
-        const res = await fetch(`http://localhost:7000/api/customers/signin`, {
-            method: 'POST',
-            body: JSON.stringify(body),
+export const getById = createAsyncThunk(
+    'customer/getById',
+    async (data, thunkAPI) => {
+        const res = await axios({
+            method: 'GET',
+            url: `/customers/${data.id}`,
             headers: {
-                'Content-Type': 'application/json'
+                token: `Bearer ${data.accessToken}`
             }
         })
 
-        const data = await res.json()
-
-        return data
-    }
-)
-
-export const register = createAsyncThunk(
-    'customer/register',
-    async (body, thunkAPI) => {
-        const res = await fetch(`http://localhost:7000/api/customers/signup`, {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
-        const data = await res.json()
-
-        return data
+        return res.data
     }
 )

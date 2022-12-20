@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
-import Cookies from "js-cookie"
-import { login, register } from "../callApi/customer"
+import { getById } from "../callApi/customer"
 
 const initialState = {
-    loading: false,
-    error: null,
-    data: null,
+    myAccount: {
+        loading: false,
+        user: null
+    }
 }
 
 export const customerSlice = createSlice({
@@ -13,35 +13,16 @@ export const customerSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        // login
-        builder.addCase(login.pending, (state, action) => {
-            state.loading = true
-        })
-        builder.addCase(login.fulfilled, (state, action) => {
-            state.loading = false
-            state.data = action.payload
-            if (action.payload.data.token) {
-                Cookies.set('token', action.payload.data.token)
-            }
-            state.error = null
-        })
-        builder.addCase(login.rejected, (state, action) => {
-            state.loading = false
-            state.error = action.payload
-        })
 
-        // register
-        builder.addCase(register.pending, (state, action) => {
-            state.loading = true
+        builder.addCase(getById.pending, (state, action) => {
+            state.myAccount.loading = true
         })
-        builder.addCase(register.fulfilled, (state, action) => {
-            state.loading = false
-            state.data = action.payload
-            state.error = null
+        builder.addCase(getById.fulfilled, (state, action) => {
+            state.myAccount.loading = false
+            state.myAccount.user = action.payload.data
         })
-        builder.addCase(register.rejected, (state, action) => {
-            state.loading = false
-            state.error = action.payload
+        builder.addCase(getById.rejected, (state, action) => {
+            state.myAccount.loading = false
         })
     }
 })
