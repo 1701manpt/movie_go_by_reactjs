@@ -2,7 +2,7 @@
 
 .wrapper {
     // background-image: linear-gradient(-135deg, #fdfbfb 10%, #ebedee 100%);
-    margin-top: 84px;
+    margin-top: $header-height;
     box-shadow: $box-shadow;
 }
 
@@ -24,3 +24,17 @@
     font-size: 1.2em;
     color: $color-title;
 }
+
+@media (max-width: 480px) {
+    .wrapper {
+        display: none;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 640px) {}
+
+@media (min-width: 641px) and (max-width: 768px) {}
+
+@media (min-width: 769px) and (max-width: 1007px) {}
+
+@media (min-width: 1008px) and (max-width: 1200px) {}

@@ -12,6 +12,10 @@ a {
 	text-decoration: none;
 }
 
+input[type] {
+	font-size: inherit;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -27,6 +31,4 @@ a {
 	}
 }
 
-input[type] {
-	font-size: inherit;
-}
+@media (max-width: 600px) {}

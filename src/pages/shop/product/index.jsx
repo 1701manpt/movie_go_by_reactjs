@@ -49,7 +49,6 @@ function List() {
                             : products && <ListProduct
                                 data={products}
                                 item={ProductItem}
-                                style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}
                             />}
                     </SectionContent>
                 </Section>

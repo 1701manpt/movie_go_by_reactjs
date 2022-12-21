@@ -1,9 +1,46 @@
+@import '../styles/variables.scss';
+
+.container {
+    max-width: 1200px;
+    min-width: 100%;
+}
+
 .main {
-    margin-top: 84px;
+    margin-top: $header-height;
     padding: 32px;
     min-height: calc(100vh - 84px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+@media (max-width: 480px) {
+    .main {
+        padding: 0px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 640px) {
+    .main {
+        padding: 0px;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+    .main {
+        padding: 8px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1007px) {
+    .main {
+        padding: 16px;
+    }
+}
+
+@media (min-width: 1008px) and (max-width: 1200px) {
+    .main {
+        padding: 16px;
+    }
 }

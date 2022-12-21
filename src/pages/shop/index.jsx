@@ -71,7 +71,6 @@ export default function Shop() {
                     <SectionTitle style={{ color: '#E80505' }}>Sản phẩm ưu đãi</SectionTitle>
                     <SectionContent>
                         <List
-                            style={{ gridTemplateColumns: 'repeat(6, 1fr)' }}
                             data={products}
                             item={ProductItem}
                         />

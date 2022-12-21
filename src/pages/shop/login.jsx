@@ -43,7 +43,7 @@ function Login() {
 
     useEffect(() => {
         setToggleError(false)
-    }, [state])
+    }, [])
 
     if (user) {
         router.push('/shop')
@@ -57,34 +57,33 @@ function Login() {
                 <link rel="icon" href="/login.png" />
             </Head>
             <Layout>
-                <div>
-                    {toggleError && <div style={{ color: 'red', minHeight: '1.4rem' }}>{message}</div>}
-                    <Form>
-                        <FormTitle>Đăng nhập</FormTitle>
-                        <FormContent>
-                            <Input
-                                label="Tài khoản"
-                                type="text"
-                                name="account"
-                                placeholder="Enter your account"
-                                onChange={(e) => { onChangeState(e) }}
-                                error={validation || null}
-                            />
-                            <Input
-                                label="Mật khẩu"
-                                type="password"
-                                name="password"
-                                placeholder="Enter your password"
-                                onChange={(e) => { onChangeState(e) }}
-                                error={validation || null}
-                            />
-                        </FormContent>
-                        <FormAction>
-                            <Button type="submit" onClick={handleLogin}>Login</Button>
-                            <Link href="/shop/register">Đi đến đăng ký</Link>
-                        </FormAction>
-                    </Form>
-                </div>
+                {toggleError && <div style={{ color: 'red', minHeight: '1.4rem' }}>{message}</div>}
+                <Form>
+                    <FormTitle>Đăng nhập</FormTitle>
+                    <FormContent>
+                        <Input
+                            label="Tài khoản"
+                            type="text"
+                            name="account"
+                            placeholder="Enter your account"
+                            onChange={(e) => { onChangeState(e) }}
+                            error={validation || null}
+                        />
+                        <Input
+                            label="Mật khẩu"
+                            type="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            onChange={(e) => { onChangeState(e) }}
+                            error={validation || null}
+                        />
+                    </FormContent>
+                    <FormAction>
+                        <Button type="submit" onClick={handleLogin}>Login</Button>
+                        <hr />
+                        <Link href="/shop/register">Đi đến đăng ký</Link>
+                    </FormAction>
+                </Form>
             </Layout>
         </>
     )

@@ -1,7 +1,10 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import styles from './index.module.scss'
 
-function CategoryItem({ data, active }) {
+function CategoryItem({ data }) {
+
+    const router = useRouter()
 
     const path = '/shop/product' + '?' + 'category=' + data.id
 
@@ -9,7 +12,7 @@ function CategoryItem({ data, active }) {
         <Link className={
             [
                 styles.wrapper,
-                active && styles.active || ''
+                router.asPath === path && styles.active || ''
             ].join(' ')}
             href={path}
         >

@@ -8,22 +8,21 @@
     border-radius: 999em 8px 8px 999em;
     background-image: linear-gradient(135deg, #AFF1DA 10%, #F9EA8F 100%);
     box-shadow: $box-shadow;
+    cursor: pointer;
 
     &+.wrapper {
         margin-top: 8px;
     }
 
     &:hover {
-        cursor: pointer;
         color: $color-path;
-        border-right: 4px solid $color-path;
-        border-left: 4px solid $color-path;
-        background-image: linear-gradient(135deg, #fdfbfb 10%, #ebedee 100%);
     }
 }
 
 .active {
-    font-size: 2rem;
+    border-right: 4px solid $color-path;
+    border-left: 4px solid $color-path;
+    background-image: linear-gradient(135deg, #fdfbfb 10%, #ebedee 100%);
 }
 
 .image {

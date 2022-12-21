@@ -2,12 +2,13 @@
 
 .wrapper {
     position: absolute;
+    width: 100%;
     background-image: linear-gradient(-135deg, #667eea 10%, #764ba2 100%);
     color: whitesmoke;
     top: 0;
     left: 0;
     right: 0;
-    height: 84px;
+    height: $header-height;
     display: grid;
     grid-template-columns: 240px 1fr 240px;
     gap: 32px;
@@ -26,7 +27,6 @@
 }
 
 .navbar {
-    width: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,3 +74,90 @@
         border: 1px solid #667eea;
     }
 }
+
+.menu {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    .wrapper {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .logo,
+    .right {
+        width: fit-content;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .menu {
+        display: flex;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 640px) {
+    .wrapper {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .logo,
+    .right {
+        width: fit-content;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .menu {
+        display: flex;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+    .wrapper {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        height: 48px;
+    }
+
+    .logo,
+    .right {
+        width: fit-content;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .menu {
+        display: flex;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1007px) {
+    .wrapper {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .logo,
+    .right {
+        width: fit-content;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .menu {
+        display: flex;
+    }
+}
+
+@media (min-width: 1008px) and (max-width: 1200px) {}

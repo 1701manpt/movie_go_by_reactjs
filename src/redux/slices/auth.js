@@ -5,18 +5,18 @@ const initialState = {
     login: {
         currentUser: null,
         status: 'idle', // 'idle', 'loading', 'successed', 'failed'
-        message: '',
+        message: null,
         validation: null
     },
     register: {
-        loading: false,
-        error: false,
+        currentUser: null,
+        status: 'idle', // 'idle', 'loading', 'successed', 'failed'
         message: null,
-        success: false,
+        validation: null
     },
     logout: {
         status: 'idle', // 'idle', 'loading', 'successed', 'failed'
-        message: '',
+        message: null,
     },
 }
 
@@ -33,7 +33,7 @@ export const authSlice = createSlice({
         builder.addCase(login.pending, (state, action) => {
             state.login.status = 'loading'
             state.login.currentUser = null
-            state.login.message = ''
+            state.login.message = null
             state.login.validation = null
         })
         builder.addCase(login.fulfilled, (state, action) => {
@@ -63,10 +63,19 @@ export const authSlice = createSlice({
             state.register.loading = true
         })
         builder.addCase(register.fulfilled, (state, action) => {
-            state.register.loading = false
-            state.register.success = true
-            state.register.message = action.payload.message
-            state.register.error = false
+            if (action.payload.status === 200) {
+                state.register.status = 'successed'
+                state.register.currentUser = action.payload.data
+                state.register.message = action.payload.message
+                state.register.validation = null
+            }
+
+            if (action.payload.status !== 200) {
+                state.register.status = 'failed'
+                state.register.currentUser = null
+                state.register.message = action.payload.message
+                state.register.validation = action.payload.error
+            }
         })
         builder.addCase(register.rejected, (state, action) => {
             state.register.loading = false

@@ -21,13 +21,17 @@ export const login = createAsyncThunk(
 export const register = createAsyncThunk(
     'auth/register',
     async (data, thunkAPI) => {
-        const res = await axios({
-            method: 'POST',
-            url: `/auth/register`,
-            data: data,
-        })
+        try {
+            const res = await axios({
+                method: 'POST',
+                url: `/auth/register`,
+                data: data,
+            })
 
-        return res
+            return res
+        } catch (error) {
+            return error.response.data
+        }
     }
 )
 

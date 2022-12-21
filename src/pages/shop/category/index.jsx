@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 
 // components
 import CategoryItem from "../../../components/list/category"
-import List from "../../../components/list"
+import ListCategory from "../../../components/list"
 import Section, { SectionContent } from "../../../components/section"
 
 // layouts
@@ -35,13 +35,14 @@ function List() {
                 <link rel="icon" href="/product.png" />
             </Head>
             <Layout>
-                <Section style={{ backgroundImage: 'linear-gradient(135deg, #9796f0 10%, #FBC7D4 100%)' }}>
+                <Section style={{ backgroundImage: 'unset' }}>
                     <SectionContent>
                         {loading ? <div>loading...</div>
-                            : categories && <List
+                            : categories && <ListCategory
                                 data={categories}
                                 item={CategoryItem}
-                                style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}
+                                style={{ gridTemplateColumns: 'repeat(6, 1fr)' }}
+                                styleOfItem={{ backgroundImage: 'none', backgroundColor: '#e8e8e8' }}
                             />}
                     </SectionContent>
                 </Section>
