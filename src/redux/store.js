@@ -3,6 +3,7 @@ import customerReducer from "./slices/customer"
 import authReducer from "./slices/auth"
 import productReducer from "./slices/product"
 import orderReducer from "./slices/order"
+import categoryReducer from "./slices/category"
 
 // redux persist
 import storage from 'redux-persist/lib/storage';
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
     auth: authReducer,
     product: productReducer,
     order: orderReducer,
+    category: categoryReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

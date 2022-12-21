@@ -2,6 +2,7 @@
   "name": "storeonline_reactjs",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3000",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
     "axios": "^1.2.1",
+    "change-case": "^4.1.2",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
     "js-cookie": "^3.0.1",

@@ -1,15 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import axios from "../../config/axios"
-import axiosPrivate from "../../hooks/useRefreshToken"
+import axios from "../../axios"
 
 export const getAll = createAsyncThunk(
     'order/getAll',
-    async (data, thunkAPI) => {
-        const res = await axiosPrivate({
+    async (user) => {
+        const res = await axios({
             method: 'GET',
-            url: `/customers/${data.id}/orders`,
+            url: `/customers/${user.id}/orders`,
             headers: {
-                token: `Bearer ${data.accessToken}`,
+                token: `Bearer ${user.accessToken}`,
             }
         })
 

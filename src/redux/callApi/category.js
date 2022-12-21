@@ -2,12 +2,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "../../axios"
 
 export const getAll = createAsyncThunk(
-    'product/getAll',
+    'category/getAll',
     async (body, thunkAPI) => {
         try {
             const res = await axios({
                 method: 'GET',
-                url: `/products`
+                url: `/categories`
             })
 
             return res.data
@@ -18,12 +18,28 @@ export const getAll = createAsyncThunk(
 )
 
 export const getById = createAsyncThunk(
-    'product/getById',
+    'category/getById',
     async (id, thunkAPI) => {
         try {
             const res = await axios({
                 method: 'GET',
-                url: `/products/${id}`
+                url: `/categories/${id}`
+            })
+
+            return res.data
+        } catch (error) {
+            return error.response.data
+        }
+    }
+)
+
+export const getProductsByCategory = createAsyncThunk(
+    'category/getProductsByCategory',
+    async (id, thunkAPI) => {
+        try {
+            const res = await axios({
+                method: 'GET',
+                url: `/categories/${id}/products`
             })
 
             return res.data

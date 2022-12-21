@@ -15,21 +15,26 @@ import Layout from '../../layouts'
 
 // redux
 import { useDispatch, useSelector } from 'react-redux'
-import { getAll } from '../../redux/callApi/product'
+import * as productApi from '../../redux/callApi/product'
+import * as categoryApi from '../../redux/callApi/category'
 
 export default function Shop() {
 
     const dispatch = useDispatch()
-    const { loading, error, data } = useSelector((state) => state.product)
-
-    const productListTopTrending = data?.data
+    const products = useSelector((state) => state.product.list?.products)
+    const categories = useSelector((state) => state.category.list?.categories)
 
     const getProducts = () => {
-        dispatch(getAll())
+        dispatch(productApi.getAll())
+    }
+
+    const getCategories = () => {
+        dispatch(categoryApi.getAll())
     }
 
     useEffect(() => {
         getProducts()
+        getCategories()
     }, [])
 
     return (
@@ -43,7 +48,7 @@ export default function Shop() {
                 <Section>
                     <SectionTitle>Danh mục</SectionTitle>
                     <SectionContent>
-                        <List data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} item={CategoryItem} />
+                        <List data={categories} item={CategoryItem} />
                     </SectionContent>
                 </Section>
                 <Section
@@ -52,7 +57,7 @@ export default function Shop() {
                     <SectionTitle style={{ color: '#FFFFFF' }}>Sản phẩm thịnh hành</SectionTitle>
                     <SectionContent>
                         <List
-                            data={productListTopTrending}
+                            data={products}
                             item={ProductItem}
                             styleOfItem={{ backgroundImage: 'linear-gradient(135deg, #dfe9f3 10%, #ffffff 100%)' }}
                         />
@@ -67,7 +72,7 @@ export default function Shop() {
                     <SectionContent>
                         <List
                             style={{ gridTemplateColumns: 'repeat(6, 1fr)' }}
-                            data={productListTopTrending}
+                            data={products}
                             item={ProductItem}
                         />
                     </SectionContent>
