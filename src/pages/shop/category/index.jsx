@@ -16,8 +16,8 @@ import * as categoryApi from "../../../redux/callApi/category"
 function List() {
 
     const dispatch = useDispatch()
-    const loading = useSelector((state) => state.product.list?.loading)
-    const categories = useSelector((state) => state.category.list?.categories)
+    const loading = useSelector((state) => state.product.list.loading)
+    const categories = useSelector((state) => state.category.list.data)
 
     const getCategories = () => {
         dispatch(categoryApi.getAll())

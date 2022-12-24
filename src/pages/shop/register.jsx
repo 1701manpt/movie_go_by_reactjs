@@ -14,10 +14,9 @@ import { register } from '../../redux/callApi/auth'
 function Register() {
 
     const router = useRouter()
-    const [toggleError, setToggleError] = useState(false)
     const dispatch = useDispatch()
-    const status = useSelector((state) => state.auth.register.status)
-    const validation = useSelector((state) => state.auth.register.validation)
+    const newUser = useSelector((state) => state.auth.register.newUser)
+    const validation = useSelector((state) => state.auth.register.error)
     const message = useSelector((state) => state.auth.register.message)
     const [state, setState] = useState({})
 
@@ -33,9 +32,7 @@ function Register() {
     }
 
     useEffect(() => {
-        setToggleError(false)
-
-        if (status === 'successed') {
+        if (newUser) {
             router.push('/shop/login')
         }
     }, [dispatch])
@@ -49,7 +46,7 @@ function Register() {
             </Head>
             <Layout>
                 <div>
-                    {toggleError && <div style={{ color: 'red', minHeight: '1.4rem' }}>{message}</div>}
+                    <div style={{ color: 'red', minHeight: '1.4rem' }}>{message}</div>
                     <Form>
                         <FormTitle>Đăng ký</FormTitle>
                         <FormContent>

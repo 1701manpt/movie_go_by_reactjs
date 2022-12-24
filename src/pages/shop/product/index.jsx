@@ -19,8 +19,8 @@ function List() {
 
     const dispatch = useDispatch()
     const loading = useSelector((state) => state.product.list?.loading)
-    const products = useSelector((state) => state.product.list?.products)
-    const categories = useSelector((state) => state.category.list?.categories)
+    const products = useSelector((state) => state.product.list?.data)
+    const categories = useSelector((state) => state.category.list?.data)
 
     const getProducts = () => {
         dispatch(productApi.getAll())

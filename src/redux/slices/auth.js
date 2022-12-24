@@ -1,112 +1,128 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { login, register, logout } from "../callApi/auth"
+import { login, register, logout, refreshToken } from "../callApi/auth"
 
 const initialState = {
     login: {
         currentUser: null,
-        status: 'idle', // 'idle', 'loading', 'successed', 'failed'
+        loading: false,
         message: null,
-        validation: null
+        error: null
     },
     register: {
-        currentUser: null,
-        status: 'idle', // 'idle', 'loading', 'successed', 'failed'
+        newUser: null,
+        loading: false,
         message: null,
-        validation: null
+        error: null
     },
     logout: {
-        status: 'idle', // 'idle', 'loading', 'successed', 'failed'
+        loading: false,
         message: null,
+        error: null,
     },
+    refresh: {
+        loading: false,
+        message: null,
+        error: null,
+    }
 }
 
 export const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {
-        reLogin: (state, action) => {
-            state.currentUser = action.payload
-        }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         // login
         builder.addCase(login.pending, (state, action) => {
-            state.login.status = 'loading'
             state.login.currentUser = null
+            state.login.loading = true
             state.login.message = null
-            state.login.validation = null
+            state.login.error = null
         })
         builder.addCase(login.fulfilled, (state, action) => {
-            if (action.payload.status === 200) {
-                state.login.status = 'successed'
-                state.login.currentUser = action.payload.data
-                state.login.message = action.payload.message
-                state.login.validation = null
-            }
-
-            if (action.payload.status !== 200) {
-                state.login.status = 'failed'
-                state.login.currentUser = null
-                state.login.message = action.payload.message
-                state.login.validation = action.payload.error
-            }
+            state.login.currentUser = action.payload.data
+            state.login.loading = false
+            state.login.message = action.payload.message
+            state.login.error = null
         })
         builder.addCase(login.rejected, (state, action) => {
-            state.login.status = 'failed'
             state.login.currentUser = null
-            state.login.message = action.error.message || ''
-            state.login.validation = null
+            state.login.loading = false
+            state.login.message = action.payload.message
+            state.login.error = action.payload.error
         })
 
         // register
         builder.addCase(register.pending, (state, action) => {
+            state.register.newUser = null
             state.register.loading = true
+            state.register.message = null
+            state.register.error = null
         })
         builder.addCase(register.fulfilled, (state, action) => {
-            if (action.payload.status === 200) {
-                state.register.status = 'successed'
-                state.register.currentUser = action.payload.data
-                state.register.message = action.payload.message
-                state.register.validation = null
-            }
-
-            if (action.payload.status !== 200) {
-                state.register.status = 'failed'
-                state.register.currentUser = null
-                state.register.message = action.payload.message
-                state.register.validation = action.payload.error
-            }
+            state.register.newUser = action.payload.data
+            state.register.loading = false
+            state.register.message = action.payload.message
+            state.register.error = null
         })
         builder.addCase(register.rejected, (state, action) => {
+            state.register.result = null
             state.register.loading = false
-            state.register.error = true
+            state.register.message = action.payload.message
+            state.register.error = action.payload.error
         })
 
         // log out
         builder.addCase(logout.pending, (state, action) => {
-            state.logout.status = 'loading'
+            state.logout.loading = true
+            state.logout.message = null
+            state.logout.error = null
         })
         builder.addCase(logout.fulfilled, (state, action) => {
+            state.logout.loading = false
+            state.logout.message = action.payload.message
+            state.logout.error = null
 
-            if (action.payload.status === 200) {
-                state.logout.status = 'successed'
-                state.login.status = 'idle'
-                state.login.currentUser = null
-                state.logout.message = action.payload.message
-            }
-
-            if (action.payload.status !== 200) {
-                state.logout.status = 'failed'
-                state.logout.message = action.payload.message
-            }
+            // login
+            state.login.currentUser = null
+            state.login.message = null
+            state.login.error = null
         })
         builder.addCase(logout.rejected, (state, action) => {
-            state.logout.status = 'failed'
-            state.logout.message = action.error.message || ''
+            state.logout.loading = false
+            state.logout.message = action.payload.message
+            state.logout.error = action.payload.error
+        })
+
+        // refresh token
+        builder.addCase(refreshToken.pending, (state, action) => {
+            console.log('Loading refresh token...');
+            state.refresh.loading = true
+            state.refresh.message = null
+            state.refresh.error = null
+        })
+        builder.addCase(refreshToken.fulfilled, (state, action) => {
+            state.refresh.loading = false
+            state.refresh.message = action.payload.message
+            state.refresh.error = null
+
+            // login
+            state.login.currentUser = {
+                ...state.login.currentUser,
+                token: action.payload.data.token,
+            }
+            state.login.message = null
+            state.login.error = null
+
+            console.log('Fulfilled refresh token...', state.login.currentUser);
+        })
+        builder.addCase(refreshToken.rejected, (state, action) => {
+            state.refresh.loading = false
+            state.refresh.message = action.payload.message
+            state.refresh.error = action.payload.error
+
+            console.log('Rejected refresh token...', state.login.currentUser);
         })
     }
 })
-
-export const { reLogin } = authSlice.actions
 
 export default authSlice.reducer

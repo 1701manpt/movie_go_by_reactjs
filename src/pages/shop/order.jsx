@@ -20,7 +20,7 @@ function Order() {
     const dispatch = useDispatch()
 
     const user = useSelector((state) => state.auth.login.currentUser)
-    const list = useSelector((state) => state.order.orders.list)
+    const list = useSelector((state) => state.order.list.data)
 
     useEffect(() => {
         dispatch(getAll(user))

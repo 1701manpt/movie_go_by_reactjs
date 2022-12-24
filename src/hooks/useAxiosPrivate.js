@@ -1,57 +1,61 @@
-import axios, { axiosPrivate } from "../axios"
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { axiosPrivate } from "../axios";
+import { refreshToken } from "../redux/callApi/auth";
 
 const useAxiosPrivate = () => {
 
+    const dispatch = useDispatch()
     const user = useSelector((state) => state.auth.login.currentUser)
+    const loading = useSelector((state) => state.auth.refresh.loading)
 
-    const refreshToken = async () => {
-        try {
-            const res = await axios({
-                method: 'POST',
-                url: '/auth/refresh',
-                withCredentials: true
-            })
-
-            return res.data
-        } catch (error) {
-            return error.response.data
-        }
-    }
+    console.log(user, loading);
 
     useEffect(() => {
 
-        const requestInterceptor = axiosPrivate.interceptors.request.use(
+        const requestInterCept = axiosPrivate.interceptors.request.use(
             config => {
+                console.log('Requesting..., Token: ', config.headers['token']);
                 if (!config.headers['token']) {
-                    config.headers['token'] = `Bearer ${user.accessToken}`
+                    console.log(user.token);
+                    config.headers['token'] = `Bearer ${user.token}`
                 }
 
                 return config
-            }, (error) => Promise.reject(error)
+            },
+            async (error) => Promise.reject(error)
         )
 
-        const responseInterceptor = axiosPrivate.interceptors.response.use(
-            response => response,
+        const responseIntercept = axiosPrivate.interceptors.response.use(
+            response => {
+                console.log('200 => Sending request...');
+                return response
+            },
             async (error) => {
                 const prevRequest = error?.config
-                if (error?.response?.status === 400 && !prevRequest?.sent) {
+                if (error?.response?.status === 401 && !prevRequest?.sent) {
                     prevRequest.sent = true
-                    const requestRefresh = await refreshToken()
-                    console.log(requestRefresh)
-                    prevRequest.headers['token'] = `Bearer ${requestRefresh.accessToken}`
+
+                    console.log('401 => Refreshing token...');
+
+                    dispatch(refreshToken())
+
+                    if (user.token != prevRequest.headers['token']) {
+                        prevRequest.headers['token'] = `Bearer ${user.token}`
+                    }
+
                     return axiosPrivate(prevRequest)
                 }
+
                 return Promise.reject(error)
             }
         )
 
         return () => {
-            axiosPrivate.interceptors.request.eject(requestInterceptor)
-            axiosPrivate.interceptors.response.eject(responseInterceptor)
+            axiosPrivate.interceptors.request.eject(requestInterCept)
+            axiosPrivate.interceptors.response.eject(responseIntercept)
         }
-    }, [user, refreshToken])
+    }, [user])
 
     return axiosPrivate
 }

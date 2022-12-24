@@ -18,8 +18,8 @@ function Detail() {
 
     const { query } = useRouter()
     const dispatch = useDispatch()
-    const loading = useSelector((state) => state.category.productList?.loading)
-    const products = useSelector((state) => state.category.productList?.products)
+    const loading = useSelector((state) => state.category.productList.loading)
+    const products = useSelector((state) => state.category.productList.data)
 
     const getProducts = (id) => {
         dispatch(getProductsByCategory(id))

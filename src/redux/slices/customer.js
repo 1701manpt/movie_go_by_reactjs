@@ -2,9 +2,11 @@ import { createSlice } from "@reduxjs/toolkit"
 import { getById } from "../callApi/customer"
 
 const initialState = {
-    myAccount: {
+    personal: {
         loading: false,
-        user: null
+        info: null,
+        message: null,
+        error: null,
     }
 }
 
@@ -15,14 +17,25 @@ export const customerSlice = createSlice({
     extraReducers: (builder) => {
 
         builder.addCase(getById.pending, (state, action) => {
-            state.myAccount.loading = true
+            console.log('Loading get personal info...');
+            state.personal.loading = true
+            state.personal.info = null
+            state.personal.message = null
+            state.personal.error = null
         })
         builder.addCase(getById.fulfilled, (state, action) => {
-            state.myAccount.loading = false
-            state.myAccount.user = action.payload.data
+            console.log('fulfilled', action);
+            state.personal.loading = false
+            state.personal.info = action.payload?.data
+            state.personal.message = action.payload?.message
+            state.personal.error = null
         })
         builder.addCase(getById.rejected, (state, action) => {
-            state.myAccount.loading = false
+            console.log('rejected', action);
+            state.personal.loading = false
+            state.personal.info = null
+            state.personal.message = action.payload.message
+            state.personal.error = action.payload.error
         })
     }
 })

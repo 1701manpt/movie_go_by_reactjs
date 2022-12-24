@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import styles from './index.module.scss'
-// import { headerCase } from 'change-case'
 
 const CategoryItem = ({ data, ...args }) => {
 

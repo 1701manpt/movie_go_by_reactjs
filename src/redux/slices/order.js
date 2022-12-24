@@ -2,10 +2,11 @@ import { createSlice } from "@reduxjs/toolkit"
 import { getAll } from "../callApi/order"
 
 const initialState = {
-    orders: {
+    list: {
         loading: false,
+        data: null,
+        message: null,
         error: false,
-        list: null,
     }
 }
 
@@ -16,18 +17,22 @@ export const orderSlice = createSlice({
     extraReducers: (builder) => {
         // get all
         builder.addCase(getAll.pending, (state, action) => {
-            state.orders.loading = true
-            state.orders.list = null
+            state.list.loading = true
+            state.list.data = null
+            state.list.message = null
+            state.list.error = null
         })
         builder.addCase(getAll.fulfilled, (state, action) => {
-            state.orders.loading = false
-            state.orders.list = action.payload.data
-            state.orders.error = false
+            state.list.loading = false
+            state.list.data = action.payload.data
+            state.list.message = action.payload.message
+            state.list.error = null
         })
         builder.addCase(getAll.rejected, (state, action) => {
-            state.orders.loading = false
-            state.orders.error = false
-            state.orders.list = null
+            state.list.loading = false
+            state.list.data = null
+            state.list.message = action.payload.message
+            state.list.error = action.payload.error
         })
     }
 })

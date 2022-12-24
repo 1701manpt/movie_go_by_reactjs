@@ -16,7 +16,7 @@ function Detail() {
 
     const dispatch = useDispatch()
     const loading = useSelector((state) => state.product.detail?.loading)
-    const product = useSelector((state) => state.product.detail?.product)
+    const product = useSelector((state) => state.product.detail?.data)
 
     const getProducts = (id) => {
         dispatch(getById(id))

@@ -23,11 +23,10 @@ function Login() {
     const router = useRouter()
     const dispatch = useDispatch()
     const user = useSelector((state) => state.auth.login.currentUser)
-    const validation = useSelector((state) => state.auth.login.validation)
+    const validation = useSelector((state) => state.auth.login.error)
     const message = useSelector((state) => state.auth.login.message)
 
     const [state, setState] = useState({})
-    const [toggleError, setToggleError] = useState(false)
 
     const onChangeState = (e) => {
         setState({
@@ -38,12 +37,7 @@ function Login() {
 
     const handleLogin = () => {
         dispatch(login(state))
-        setToggleError(true)
     }
-
-    useEffect(() => {
-        setToggleError(false)
-    }, [])
 
     if (user) {
         router.push('/shop')
@@ -57,7 +51,7 @@ function Login() {
                 <link rel="icon" href="/login.png" />
             </Head>
             <Layout>
-                {toggleError && <div style={{ color: 'red', minHeight: '1.4rem' }}>{message}</div>}
+                <div style={{ color: 'red', minHeight: '1.4rem' }}>{message}</div>
                 <Form>
                     <FormTitle>Đăng nhập</FormTitle>
                     <FormContent>

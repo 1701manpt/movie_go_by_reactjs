@@ -1,17 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import axios from "../../axios"
+import handleError from "../../utils/handleError"
 
 export const getById = createAsyncThunk(
     'customer/getById',
-    async (data, thunkAPI) => {
-        const res = await axios({
-            method: 'GET',
-            url: `/customers/${data.id}`,
-            headers: {
-                token: `Bearer ${data.accessToken}`
-            }
-        })
+    async ({ user, axiosPrivate }, { rejectWithValue }) => {
+        try {
+            const res = await axiosPrivate({
+                method: 'GET',
+                url: `/customers/${user?.id}`,
+            })
 
-        return res.data
+            console.log('success');
+            return res.data
+        } catch (error) {
+            console.log('error', error);
+            return handleError({ error, rejectWithValue })
+        }
     }
 )

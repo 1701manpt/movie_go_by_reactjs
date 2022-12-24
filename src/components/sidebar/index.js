@@ -12,7 +12,7 @@ function Sidebar({ data, title, item: Item }) {
             }
             <aside className={styles.content}>
                 {
-                    data.map((item, index) => {
+                    data && data.map((item, index) => {
                         return (<Item key={index} data={item} active={(router.pathname === item.path) && true || false} />)
                     })
                 }
