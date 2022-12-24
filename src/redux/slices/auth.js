@@ -95,7 +95,6 @@ export const authSlice = createSlice({
 
         // refresh token
         builder.addCase(refreshToken.pending, (state, action) => {
-            console.log('Loading refresh token...');
             state.refresh.loading = true
             state.refresh.message = null
             state.refresh.error = null
@@ -112,15 +111,11 @@ export const authSlice = createSlice({
             }
             state.login.message = null
             state.login.error = null
-
-            console.log('Fulfilled refresh token...', state.login.currentUser);
         })
         builder.addCase(refreshToken.rejected, (state, action) => {
             state.refresh.loading = false
             state.refresh.message = action.payload.message
             state.refresh.error = action.payload.error
-
-            console.log('Rejected refresh token...', state.login.currentUser);
         })
     }
 })

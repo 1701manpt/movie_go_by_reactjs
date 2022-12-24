@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Authentication from '../../../components/authentication'
+import Authentication from '../../../components/authentication';
 import BasicItem, { SidebarData } from '../../../components/sidebar/basic';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import SidebarLayout from '../../../layouts/sidebarLayout';
@@ -14,8 +14,6 @@ function Account() {
     const user = useSelector((state) => state.auth.login.currentUser)
     const myAccount = useSelector((state) => state.customer.personal.info)
     const axiosPrivate = useAxiosPrivate()
-
-    console.log('user login: ', user);
 
     useEffect(() => {
         dispatch(getById({ user, axiosPrivate }))

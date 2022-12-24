@@ -12,6 +12,7 @@ export const login = createAsyncThunk(
                 method: 'POST',
                 url: `/auth/login`,
                 data: data,
+                withCredentials: true,
             })
 
             return res.data
@@ -47,7 +48,8 @@ export const logout = createAsyncThunk(
                 url: `/auth/logout`,
                 headers: {
                     token: `Bearer ${user?.token}`,
-                }
+                },
+                withCredentials: true,
             })
 
             return res.data
@@ -66,8 +68,6 @@ export const refreshToken = createAsyncThunk(
                 url: `/auth/refresh`,
                 withCredentials: true,
             })
-
-            console.log('Calling api refresh token...');
 
             return res.data
         } catch (error) {

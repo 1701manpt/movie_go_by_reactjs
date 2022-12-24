@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import handleError from "../../utils/handleError"
+import axios from "../../axios"
 
 export const getById = createAsyncThunk(
     'customer/getById',
@@ -10,10 +11,8 @@ export const getById = createAsyncThunk(
                 url: `/customers/${user?.id}`,
             })
 
-            console.log('success');
             return res.data
         } catch (error) {
-            console.log('error', error);
             return handleError({ error, rejectWithValue })
         }
     }
