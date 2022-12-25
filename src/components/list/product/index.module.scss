@@ -5,15 +5,15 @@
     background-color: white;
     padding: 8px;
 
-    // coppy from shopee 
+    // coppy from shopee
     box-shadow: 0 0.0625rem 0.125rem 0 rgb(0 0 0 / 10%);
     border-radius: $border-radius;
-    color: rgba(0, 0, 0, .87);
+    color: rgba(0, 0, 0, 0.87);
     border: 2px solid transparent;
 
     &:hover {
         color: $color-path;
-        border: 2px solid #DE4313;
+        border: 2px solid #de4313;
 
         & .price {
             color: red;
@@ -36,7 +36,7 @@
 
 .price {
     margin: 8px 0;
-    color: #FF4E00;
+    color: #ff4e00;
 }
 
 .description {
@@ -65,24 +65,14 @@
     left: -2px;
     padding: 8px;
     font-size: 0.8em;
-    background-color: #DE4313;
+    background-color: #de4313;
     color: whitesmoke;
     border-radius: 0 0 $border-radius $border-radius;
     box-shadow: $box-shadow;
-    border: 1px solid #DE4313;
+    border: 1px solid #de4313;
     z-index: 1;
 
     &:hover {
         cursor: pointer;
     }
 }
-
-@media (max-width: 480px) {}
-
-@media (min-width: 481px) and (max-width: 640px) {}
-
-@media (min-width: 641px) and (max-width: 768px) {}
-
-@media (min-width: 769px) and (max-width: 1007px) {}
-
-@media (min-width: 1008px) and (max-width: 1200px) {}

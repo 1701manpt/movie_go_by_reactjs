@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { getAll } from "../callApi/order"
+import { createSlice } from '@reduxjs/toolkit'
+import { getAll } from '../callApi/order'
 
 const initialState = {
     list: {
@@ -7,11 +7,11 @@ const initialState = {
         data: null,
         message: null,
         error: false,
-    }
+    },
 }
 
 export const orderSlice = createSlice({
-    name: "order",
+    name: 'order',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -34,7 +34,7 @@ export const orderSlice = createSlice({
             state.list.message = action.payload.message
             state.list.error = action.payload.error
         })
-    }
+    },
 })
 
 export default orderSlice.reducer

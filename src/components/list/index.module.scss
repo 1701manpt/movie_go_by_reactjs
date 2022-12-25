@@ -1,40 +1,27 @@
+@import '../../styles/import.scss';
+
 .wrapper {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 16px;
-}
 
-@media (max-width: 480px) {
-    .wrapper {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 8px;
-    }
-}
-
-@media (min-width: 481px) and (max-width: 640px) {
-    .wrapper {
+    @include breakpoint(sm) {
         grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
     }
-}
 
-@media (min-width: 641px) and (max-width: 768px) {
-    .wrapper {
+    @include breakpoint(md) {
         grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
     }
-}
 
-@media (min-width: 769px) and (max-width: 1007px) {
-    .wrapper {
+    @include breakpoint(lg) {
         grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
     }
-}
 
-@media (min-width: 1008px) and (max-width: 1200px) {
-    .wrapper {
+    @include breakpoint(xl) {
         grid-template-columns: repeat(5, 1fr);
-        gap: 16px;
+    }
+
+    @include breakpoint(xxl) {
+        grid-template-columns: repeat(6, 1fr);
     }
 }

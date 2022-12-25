@@ -1,28 +1,26 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { axiosPrivate } from "../axios";
-import { refreshToken } from "../redux/callApi/auth";
+import { useDispatch, useSelector } from 'react-redux'
+import { axiosPrivate } from '../axios'
+import { refreshToken } from '../redux/callApi/auth'
 
 const useAxiosPrivate = () => {
-
     const dispatch = useDispatch()
     const user = useSelector((state) => state.auth.login.currentUser)
 
     // useEffect(() => {
 
     const requestInterCept = axiosPrivate.interceptors.request.use(
-        config => {
+        (config) => {
             if (!config.headers['token']) {
                 config.headers['token'] = `Bearer ${user.token}`
             }
 
             return config
         },
-        async (error) => Promise.reject(error)
+        async (error) => Promise.reject(error),
     )
 
     const responseIntercept = axiosPrivate.interceptors.response.use(
-        response => {
+        (response) => {
             return response
         },
         async (error) => {
@@ -38,7 +36,7 @@ const useAxiosPrivate = () => {
             }
 
             return Promise.reject(error)
-        }
+        },
     )
 
     // return () => {

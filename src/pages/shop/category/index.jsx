@@ -1,31 +1,30 @@
-import Head from "next/head"
-import { useEffect, useState } from "react"
+import Head from 'next/head'
+import { useEffect, useState } from 'react'
 
 // components
-import CategoryItem from "../../../components/list/category"
-import ListCategory from "../../../components/list"
-import Section, { SectionContent } from "../../../components/section"
+import CategoryItem from 'components/list/category'
+import ListCategory from 'components/list'
+import Section, { SectionContent } from 'components/section'
 
 // layouts
-import Layout from "../../../layouts"
+import Layout from 'layouts'
 
 // redux
-import { useDispatch, useSelector } from "react-redux"
-import * as categoryApi from "../../../redux/callApi/category"
+import { useDispatch, useSelector } from 'react-redux'
+import * as categoryApi from 'redux/callApi/category'
 
 function List() {
-
     const dispatch = useDispatch()
     const loading = useSelector((state) => state.product.list.loading)
     const categories = useSelector((state) => state.category.list.data)
 
-    const getCategories = () => {
-        dispatch(categoryApi.getAll())
-    }
-
     useEffect(() => {
+        const getCategories = () => {
+            dispatch(categoryApi.getAll())
+        }
+
         getCategories()
-    }, [])
+    }, [dispatch])
 
     return (
         <>
@@ -35,15 +34,18 @@ function List() {
                 <link rel="icon" href="/product.png" />
             </Head>
             <Layout>
-                <Section style={{ backgroundImage: 'unset' }}>
+                <Section>
                     <SectionContent>
-                        {loading ? <div>loading...</div>
-                            : categories && <ListCategory
-                                data={categories}
-                                item={CategoryItem}
-                                style={{ gridTemplateColumns: 'repeat(6, 1fr)' }}
-                                styleOfItem={{ backgroundImage: 'none', backgroundColor: '#e8e8e8' }}
-                            />}
+                        {loading ? (
+                            <div>loading...</div>
+                        ) : (
+                            categories && (
+                                <ListCategory
+                                    data={categories}
+                                    item={CategoryItem}
+                                />
+                            )
+                        )}
                     </SectionContent>
                 </Section>
             </Layout>

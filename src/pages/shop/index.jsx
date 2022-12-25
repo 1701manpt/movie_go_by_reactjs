@@ -5,37 +5,37 @@ import { useEffect } from 'react'
 import Head from 'next/head'
 
 // components
-import CategoryItem from '../../components/list/category'
-import List from '../../components/list'
-import Section, { SectionContent, SectionTitle } from '../../components/section'
-import ProductItem from '../../components/list/product'
+import CategoryItem from 'components/list/category'
+import List from 'components/list'
+import Section, { SectionContent, SectionTitle } from 'components/section'
+import ProductItem from 'components/list/product'
 
 // layouts
-import Layout from '../../layouts'
+import Layout from 'layouts'
 
 // redux
 import { useDispatch, useSelector } from 'react-redux'
-import * as productApi from '../../redux/callApi/product'
-import * as categoryApi from '../../redux/callApi/category'
+import * as productApi from 'redux/callApi/product'
+import * as categoryApi from 'redux/callApi/category'
 
 export default function Shop() {
-
     const dispatch = useDispatch()
     const products = useSelector((state) => state.product.list.data)
     const categories = useSelector((state) => state.category.list.data)
 
-    const getProducts = () => {
-        dispatch(productApi.getAll())
-    }
-
-    const getCategories = () => {
-        dispatch(categoryApi.getAll())
-    }
-
     useEffect(() => {
+
+        const getProducts = () => {
+            dispatch(productApi.getAll())
+        }
+
+        const getCategories = () => {
+            dispatch(categoryApi.getAll())
+        }
+
         getProducts()
         getCategories()
-    }, [])
+    }, [dispatch])
 
     return (
         <>
@@ -51,24 +51,8 @@ export default function Shop() {
                         <List data={categories} item={CategoryItem} />
                     </SectionContent>
                 </Section>
-                <Section
-                    style={{ backgroundImage: 'linear-gradient(135deg, #FF4E00 15%, #FFFFFF 0%)' }}
-                >
-                    <SectionTitle style={{ color: '#FFFFFF' }}>Sản phẩm thịnh hành</SectionTitle>
-                    <SectionContent>
-                        <List
-                            data={products}
-                            item={ProductItem}
-                            styleOfItem={{ backgroundImage: 'linear-gradient(135deg, #dfe9f3 10%, #ffffff 100%)' }}
-                        />
-                    </SectionContent>
-                </Section>
-                <Section
-                    style={{
-                        backgroundImage: 'linear-gradient(135deg, #FCCF31 10%, #ffffff 100%)'
-                    }}
-                >
-                    <SectionTitle style={{ color: '#E80505' }}>Sản phẩm ưu đãi</SectionTitle>
+                <Section>
+                    <SectionTitle>Sản phẩm thịnh hành</SectionTitle>
                     <SectionContent>
                         <List
                             data={products}
@@ -76,7 +60,13 @@ export default function Shop() {
                         />
                     </SectionContent>
                 </Section>
-            </Layout >
+                <Section>
+                    <SectionTitle>Sản phẩm ưu đãi</SectionTitle>
+                    <SectionContent>
+                        <List data={products} item={ProductItem} />
+                    </SectionContent>
+                </Section>
+            </Layout>
         </>
     )
 }

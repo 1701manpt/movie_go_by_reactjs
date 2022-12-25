@@ -3,9 +3,9 @@
 .wrapper {
     padding: 8px 16px;
     width: 100%;
-    border: 1px solid #868F96;
+    border: 1px solid #868f96;
     border-radius: $border-radius;
-    background-image: linear-gradient(-135deg, #89D4CF 10%, #734AE8 100%);
+    background-image: linear-gradient(-135deg, #89d4cf 10%, #734ae8 100%);
     color: whitesmoke;
     text-transform: uppercase;
     box-shadow: $box-shadow-3d;
@@ -16,6 +16,6 @@
     }
 
     &:active {
-        background-image: linear-gradient(135deg, #89D4CF 10%, #734AE8 100%);
+        background-image: linear-gradient(135deg, #89d4cf 10%, #734ae8 100%);
     }
 }

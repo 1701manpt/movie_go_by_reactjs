@@ -7,19 +7,18 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 // redux
-import { useDispatch, useSelector } from "react-redux"
-import { login } from "../../redux/callApi/auth"
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from 'redux/callApi/auth'
 
 // layouts
-import Layout from '../../layouts'
+import Layout from 'layouts'
 
 // components
-import Form, { FormAction, FormContent, FormTitle } from '../../components/form'
-import Input from '../../components/form/input'
-import Button from '../../components/button'
+import Form, { FormAction, FormContent, FormFooter, FormResult, FormTitle } from 'components/form'
+import Input from 'components/form/input'
+import Button from 'components/button'
 
 function Login() {
-
     const router = useRouter()
     const dispatch = useDispatch()
     const user = useSelector((state) => state.auth.login.currentUser)
@@ -27,21 +26,30 @@ function Login() {
     const message = useSelector((state) => state.auth.login.message)
 
     const [state, setState] = useState({})
+    const [showResult, setShowResult] = useState(false)
 
     const onChangeState = (e) => {
         setState({
             ...state,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         })
     }
-
     const handleLogin = () => {
+        setShowResult(true)
         dispatch(login(state))
     }
 
-    if (user) {
-        router.push('/shop')
-    }
+    useEffect(() => {
+        const navigate = setTimeout(() => {
+            if (user) {
+                router.push('/shop')
+            }
+        }, 750)
+
+        return () => {
+            clearTimeout(navigate)
+        }
+    }, [user, router])
 
     return (
         <>
@@ -51,33 +59,44 @@ function Login() {
                 <link rel="icon" href="/login.png" />
             </Head>
             <Layout>
-                <div style={{ color: 'red', minHeight: '1.4rem' }}>{message}</div>
-                <Form>
-                    <FormTitle>Đăng nhập</FormTitle>
-                    <FormContent>
-                        <Input
-                            label="Tài khoản"
-                            type="text"
-                            name="account"
-                            placeholder="Enter your account"
-                            onChange={(e) => { onChangeState(e) }}
-                            error={validation || null}
-                        />
-                        <Input
-                            label="Mật khẩu"
-                            type="password"
-                            name="password"
-                            placeholder="Enter your password"
-                            onChange={(e) => { onChangeState(e) }}
-                            error={validation || null}
-                        />
-                    </FormContent>
-                    <FormAction>
-                        <Button type="submit" onClick={handleLogin}>Login</Button>
-                        <hr />
-                        <Link href="/shop/register">Đi đến đăng ký</Link>
-                    </FormAction>
-                </Form>
+                <div>
+                    {showResult && <FormResult>
+                        {message}
+                    </FormResult>}
+                    <Form>
+                        <FormTitle>Đăng nhập</FormTitle>
+                        <FormContent>
+                            <Input
+                                label="Tài khoản"
+                                type="text"
+                                name="account"
+                                placeholder="Enter your account"
+                                onChange={(e) => {
+                                    onChangeState(e)
+                                }}
+                                error={validation}
+                            />
+                            <Input
+                                label="Mật khẩu"
+                                type="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                onChange={(e) => {
+                                    onChangeState(e)
+                                }}
+                                error={validation}
+                            />
+                        </FormContent>
+                        <FormAction>
+                            <Button type="submit" onClick={handleLogin}>
+                                Login
+                            </Button>
+                        </FormAction>
+                        <FormFooter>
+                            <Link href="/shop/register">Đi đến đăng ký</Link>
+                        </FormFooter>
+                    </Form>
+                </div>
             </Layout>
         </>
     )

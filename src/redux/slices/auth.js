@@ -1,18 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { login, register, logout, refreshToken } from "../callApi/auth"
+import { createSlice } from '@reduxjs/toolkit'
+import { login, register, logout, refreshToken } from '../callApi/auth'
 
 const initialState = {
     login: {
         currentUser: null,
         loading: false,
         message: null,
-        error: null
+        error: null,
     },
     register: {
         newUser: null,
         loading: false,
         message: null,
-        error: null
+        error: null,
     },
     logout: {
         loading: false,
@@ -23,11 +23,11 @@ const initialState = {
         loading: false,
         message: null,
         error: null,
-    }
+    },
 }
 
 export const authSlice = createSlice({
-    name: "auth",
+    name: 'auth',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -113,11 +113,17 @@ export const authSlice = createSlice({
             state.login.error = null
         })
         builder.addCase(refreshToken.rejected, (state, action) => {
+            if (action.payload.status === 403) {
+                // login
+                state.login.currentUser = null
+                state.login.message = null
+                state.login.error = null
+            }
             state.refresh.loading = false
             state.refresh.message = action.payload.message
             state.refresh.error = action.payload.error
         })
-    }
+    },
 })
 
 export default authSlice.reducer

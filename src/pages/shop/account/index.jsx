@@ -1,23 +1,22 @@
-import Head from 'next/head';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Authentication from '../../../components/authentication';
-import BasicItem, { SidebarData } from '../../../components/sidebar/basic';
-import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
-import SidebarLayout from '../../../layouts/sidebarLayout';
-import { getById } from '../../../redux/callApi/customer';
+import Head from 'next/head'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import Authentication from 'components/authentication'
+import BasicItem, { SidebarData } from 'components/sidebar/basic'
+import useAxiosPrivate from 'hooks/useAxiosPrivate'
+import SidebarLayout from 'layouts/sidebarLayout'
+import { getById } from 'redux/callApi/customer'
 
 function Account() {
-
     const dispatch = useDispatch()
+    const axiosPrivate = useAxiosPrivate()
 
     const user = useSelector((state) => state.auth.login.currentUser)
     const myAccount = useSelector((state) => state.customer.personal.info)
-    const axiosPrivate = useAxiosPrivate()
 
     useEffect(() => {
         dispatch(getById({ user, axiosPrivate }))
-    }, [user])
+    }, [dispatch, user, axiosPrivate])
 
     return (
         <Authentication>
@@ -43,21 +42,19 @@ function Account() {
                             </tr>
                         </thead>
                         <tbody>
-                            {
-                                myAccount && (
-                                    <tr>
-                                        <td style={{ border: '1px solid black' }}>{myAccount.id}</td>
-                                        <td style={{ border: '1px solid black' }}>{myAccount.fullName}</td>
-                                        <td style={{ border: '1px solid black' }}>{myAccount.phone}</td>
-                                        <td style={{ border: '1px solid black' }}>{myAccount.address}</td>
-                                        <td style={{ border: '1px solid black' }}>{myAccount.user.account}</td>
-                                        <td style={{ border: '1px solid black' }}>{myAccount.user.email}</td>
-                                        <td style={{ border: '1px solid black' }}>{myAccount.user.userStatus.name}</td>
-                                        <td style={{ border: '1px solid black' }}>{myAccount.createdAt}</td>
-                                        <td style={{ border: '1px solid black' }}>{myAccount.updatedAt}</td>
-                                    </tr>
-                                )
-                            }
+                            {myAccount && (
+                                <tr>
+                                    <td style={{ border: '1px solid black' }}>{myAccount.id}</td>
+                                    <td style={{ border: '1px solid black' }}>{myAccount.fullName}</td>
+                                    <td style={{ border: '1px solid black' }}>{myAccount.phone}</td>
+                                    <td style={{ border: '1px solid black' }}>{myAccount.address}</td>
+                                    <td style={{ border: '1px solid black' }}>{myAccount.user.account}</td>
+                                    <td style={{ border: '1px solid black' }}>{myAccount.user.email}</td>
+                                    <td style={{ border: '1px solid black' }}>{myAccount.user.userStatus.name}</td>
+                                    <td style={{ border: '1px solid black' }}>{myAccount.createdAt}</td>
+                                    <td style={{ border: '1px solid black' }}>{myAccount.updatedAt}</td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>
@@ -66,4 +63,4 @@ function Account() {
     )
 }
 
-export default Account;
+export default Account

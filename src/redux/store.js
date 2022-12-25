@@ -1,22 +1,13 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit"
-import customerReducer from "./slices/customer"
-import authReducer from "./slices/auth"
-import productReducer from "./slices/product"
-import orderReducer from "./slices/order"
-import categoryReducer from "./slices/category"
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import customerReducer from './slices/customer'
+import authReducer from './slices/auth'
+import productReducer from './slices/product'
+import orderReducer from './slices/order'
+import categoryReducer from './slices/category'
 
 // redux persist
-import storage from 'redux-persist/lib/storage';
-import {
-    persistStore,
-    persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
-} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 
 const persistConfig = {
     key: 'root',

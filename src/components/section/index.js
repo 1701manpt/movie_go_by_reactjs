@@ -9,11 +9,7 @@ export const SectionTitle = ({ children, ...args }) => {
 }
 
 export const SectionContent = ({ children }) => {
-    return (
-        <div className={styles.content}>
-            {children}
-        </div>
-    )
+    return <div className={styles.content}>{children}</div>
 }
 
 function Section({ children, ...args }) {

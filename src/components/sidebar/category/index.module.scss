@@ -6,11 +6,11 @@
     width: 100%;
     padding: 8px;
     border-radius: 999em 8px 8px 999em;
-    background-image: linear-gradient(135deg, #AFF1DA 10%, #F9EA8F 100%);
+    background-image: linear-gradient(135deg, #aff1da 10%, #f9ea8f 100%);
     box-shadow: $box-shadow;
     cursor: pointer;
 
-    &+.wrapper {
+    & + .wrapper {
         margin-top: 8px;
     }
 

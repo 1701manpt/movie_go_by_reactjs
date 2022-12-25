@@ -1,41 +1,48 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import Layout from '../../layouts'
+import Layout from 'layouts'
 
 // redux
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
-import Button from '../../components/button'
-import Form, { FormAction, FormContent, FormTitle } from '../../components/form'
-import Input from '../../components/form/input'
-import { register } from '../../redux/callApi/auth'
+import Button from 'components/button'
+import Form, { FormAction, FormContent, FormFooter, FormResult, FormTitle } from 'components/form'
+import Input from 'components/form/input'
+import { register } from 'redux/callApi/auth'
 
 function Register() {
-
     const router = useRouter()
     const dispatch = useDispatch()
     const newUser = useSelector((state) => state.auth.register.newUser)
     const validation = useSelector((state) => state.auth.register.error)
     const message = useSelector((state) => state.auth.register.message)
     const [state, setState] = useState({})
+    const [showResult, setShowResult] = useState(false)
 
     const onChangeState = (e) => {
         setState({
             ...state,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         })
     }
 
     const handleRegister = () => {
         dispatch(register(state))
+        setShowResult(true)
     }
 
     useEffect(() => {
-        if (newUser) {
-            router.push('/shop/login')
+        const navigate = setTimeout(() => {
+            if (newUser) {
+                router.push('/shop/login')
+            }
+        }, 750)
+
+        return () => {
+            clearTimeout(navigate)
         }
-    }, [dispatch])
+    }, [newUser, router, dispatch])
 
     return (
         <>
@@ -45,8 +52,8 @@ function Register() {
                 <link rel="icon" href="/register.png" />
             </Head>
             <Layout>
+                {showResult && <FormResult>{message}</FormResult>}
                 <div>
-                    <div style={{ color: 'red', minHeight: '1.4rem' }}>{message}</div>
                     <Form>
                         <FormTitle>Đăng ký</FormTitle>
                         <FormContent>
@@ -55,63 +62,80 @@ function Register() {
                                 type="text"
                                 name="fullName"
                                 placeholder="Enter your full name"
-                                onChange={(e) => { onChangeState(e) }}
-                                error={validation || null}
+                                onChange={(e) => {
+                                    onChangeState(e)
+                                }}
+                                error={validation}
                             />
                             <Input
                                 label="Địa chỉ"
                                 type="text"
                                 name="address"
                                 placeholder="Enter your address"
-                                onChange={(e) => { onChangeState(e) }}
-                                error={validation || null}
+                                onChange={(e) => {
+                                    onChangeState(e)
+                                }}
+                                error={validation}
                             />
                             <Input
                                 label="Số điện thoại"
                                 type="text"
                                 name="phone"
                                 placeholder="Enter your number phone"
-                                onChange={(e) => { onChangeState(e) }}
-                                error={validation || null}
+                                onChange={(e) => {
+                                    onChangeState(e)
+                                }}
+                                error={validation}
                             />
                             <Input
                                 label="Tài khoản"
                                 type="text"
-                                name="account"
+                                name="user.account"
                                 placeholder="Enter your account"
-                                onChange={(e) => { onChangeState(e) }}
-                                error={validation || null}
+                                onChange={(e) => {
+                                    onChangeState(e)
+                                }}
+                                error={validation}
                             />
                             <Input
                                 label="Mật khẩu"
                                 type="password"
-                                name="password"
+                                name="user.password"
                                 placeholder="Enter your password"
-                                onChange={(e) => { onChangeState(e) }}
-                                error={validation || null}
+                                onChange={(e) => {
+                                    onChangeState(e)
+                                }}
+                                error={validation}
                             />
                             <Input
                                 label="Xác nhận mật khẩu"
                                 type="password"
-                                name="confirmPassword"
+                                name="user.confirmPassword"
                                 placeholder="Enter your confirm password"
-                                onChange={(e) => { onChangeState(e) }}
-                                error={validation || null}
+                                onChange={(e) => {
+                                    onChangeState(e)
+                                }}
+                                error={validation}
                             />
                             <Input
                                 label="Email"
                                 type="text"
-                                name="email"
+                                name="user.email"
                                 placeholder="Enter your email"
-                                onChange={(e) => { onChangeState(e) }}
-                                error={validation || null}
+                                onChange={(e) => {
+                                    onChangeState(e)
+                                }}
+                                error={validation}
                             />
                         </FormContent>
                         <FormAction>
-                            <Button type="submit" onClick={handleRegister}>Register</Button>
-                            <hr />
-                            <Link href="/shop/login">Đi đến đăng nhập</Link>
+                            <Button type="submit" onClick={handleRegister}>
+                                Register
+                            </Button>
                         </FormAction>
+                        <FormFooter>
+                            <Link href="/shop/login">Đi đến đăng nhập</Link>
+                        </FormFooter>
                     </Form>
                 </div>
             </Layout>

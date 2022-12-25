@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { getAll, getById, getProductsByCategory } from "../callApi/category"
+import { createSlice } from '@reduxjs/toolkit'
+import { getAll, getById, getProductsByCategory } from '../callApi/category'
 
 const initialState = {
     list: {
@@ -19,11 +19,11 @@ const initialState = {
         data: null,
         message: null,
         error: null,
-    }
+    },
 }
 
 export const categorySlice = createSlice({
-    name: "category",
+    name: 'category',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -86,7 +86,7 @@ export const categorySlice = createSlice({
             state.productList.message = action.payload.message
             state.productList.error = action.payload.error
         })
-    }
+    },
 })
 
 export default categorySlice.reducer

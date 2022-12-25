@@ -1,39 +1,39 @@
-import Head from "next/head"
-import { useEffect, useState } from "react"
+import Head from 'next/head'
+import { useEffect, useState } from 'react'
 
 // components
-import CategoryItem from "../../../components/sidebar/category"
-import ListProduct from "../../../components/list"
-import ProductItem from "../../../components/list/product"
-import Section, { SectionContent } from "../../../components/section"
+import CategoryItem from 'components/sidebar/category'
+import ListProduct from 'components/list'
+import ProductItem from 'components/list/product'
+import Section, { SectionContent } from 'components/section'
 
 // layouts
-import SidebarLayout from "../../../layouts/sidebarLayout"
+import SidebarLayout from 'layouts/sidebarLayout'
 
 // redux
-import { useDispatch, useSelector } from "react-redux"
-import * as productApi from "../../../redux/callApi/product"
-import * as categoryApi from "../../../redux/callApi/category"
+import { useDispatch, useSelector } from 'react-redux'
+import * as productApi from 'redux/callApi/product'
+import * as categoryApi from 'redux/callApi/category'
 
 function List() {
-
     const dispatch = useDispatch()
     const loading = useSelector((state) => state.product.list?.loading)
     const products = useSelector((state) => state.product.list?.data)
     const categories = useSelector((state) => state.category.list?.data)
 
-    const getProducts = () => {
-        dispatch(productApi.getAll())
-    }
-
-    const getCategories = () => {
-        dispatch(categoryApi.getAll())
-    }
-
     useEffect(() => {
+
+        const getProducts = () => {
+            dispatch(productApi.getAll())
+        }
+
+        const getCategories = () => {
+            dispatch(categoryApi.getAll())
+        }
+
         getProducts()
         getCategories()
-    }, [])
+    }, [dispatch])
 
     return (
         <>
@@ -43,13 +43,13 @@ function List() {
                 <link rel="icon" href="/product.png" />
             </Head>
             <SidebarLayout title="Danh mục" data={categories} item={CategoryItem}>
-                <Section style={{ backgroundImage: 'linear-gradient(135deg, #9796f0 10%, #FBC7D4 100%)' }}>
+                <Section>
                     <SectionContent>
-                        {loading ? <div>loading...</div>
-                            : products && <ListProduct
-                                data={products}
-                                item={ProductItem}
-                            />}
+                        {loading ? (
+                            <div>loading...</div>
+                        ) : (
+                            products && <ListProduct data={products} item={ProductItem} />
+                        )}
                     </SectionContent>
                 </Section>
             </SidebarLayout>

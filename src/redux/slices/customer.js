@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { getById } from "../callApi/customer"
+import { createSlice } from '@reduxjs/toolkit'
+import { getById } from '../callApi/customer'
 
 const initialState = {
     personal: {
@@ -7,15 +7,14 @@ const initialState = {
         info: null,
         message: null,
         error: null,
-    }
+    },
 }
 
 export const customerSlice = createSlice({
-    name: "customer",
+    name: 'customer',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-
         builder.addCase(getById.pending, (state, action) => {
             state.personal.loading = true
             state.personal.info = null
@@ -34,7 +33,7 @@ export const customerSlice = createSlice({
             state.personal.message = action.payload.message
             state.personal.error = action.payload.error
         })
-    }
+    },
 })
 
 export default customerSlice.reducer

@@ -1,19 +1,35 @@
-import Head from "next/head";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Authentication from "../../components/authentication";
-import Layout from "../../layouts";
-import { logout } from "../../redux/callApi/auth";
+import { useEffect, useState } from 'react'
+import Head from 'next/head'
+
+// components
+import Authentication from 'components/authentication'
+
+// layouts
+import Layout from 'layouts'
+
+// redux
+import { logout } from 'redux/callApi/auth'
+import { useDispatch, useSelector } from 'react-redux'
+
+// hooks
+import useAxiosPrivate from 'hooks/useAxiosPrivate'
+import { FormResult } from 'components/form'
 
 function Logout() {
-
     const dispatch = useDispatch()
-
+    const axiosPrivate = useAxiosPrivate()
     const user = useSelector((state) => state.auth.login.currentUser)
+    const loading = useSelector((state) => state.auth.logout.loading)
 
     useEffect(() => {
-        dispatch(logout(user))
-    }, [])
+        const dispatchLogout = setTimeout(() => {
+            dispatch(logout({ user, axiosPrivate }))
+        }, 750)
+
+        return () => {
+            clearTimeout(dispatchLogout)
+        }
+    }, [dispatch, user, axiosPrivate])
 
     return (
         <Authentication>
@@ -23,10 +39,12 @@ function Logout() {
                 <link rel="icon" href="/login.png" />
             </Head>
             <Layout>
-                Log out
+                <FormResult>
+                    Đang đăng xuất....
+                </FormResult>
             </Layout>
         </Authentication>
     )
 }
 
-export default Logout;
+export default Logout

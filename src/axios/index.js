@@ -10,7 +10,7 @@ const axios = http.create({
 const axiosPrivate = http.create({
     baseURL: 'http://localhost:7000/api',
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
     },
     withCredentials: true,
 })

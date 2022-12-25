@@ -1,35 +1,34 @@
-import Head from "next/head"
-import { useEffect } from "react"
-import { useRouter } from "next/router"
+import Head from 'next/head'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 // components
-import Section, { SectionContent } from "../../../../components/section"
-import List from "../../../../components/list"
+import Section, { SectionContent } from 'components/section'
+import List from 'components/list'
 
 // layouts
-import Layout from "../../../../layouts"
+import Layout from 'layouts'
 
 // redux
-import { useDispatch, useSelector } from "react-redux"
-import { getProductsByCategory } from "../../../../redux/callApi/category"
-import ProductItem from "../../../../components/list/product"
+import { useDispatch, useSelector } from 'react-redux'
+import { getProductsByCategory } from 'redux/callApi/category'
+import ProductItem from 'components/list/product'
 
 function Detail() {
-
     const { query } = useRouter()
     const dispatch = useDispatch()
     const loading = useSelector((state) => state.category.productList.loading)
     const products = useSelector((state) => state.category.productList.data)
 
-    const getProducts = (id) => {
-        dispatch(getProductsByCategory(id))
-    }
-
     useEffect(() => {
+        const getProducts = (id) => {
+            dispatch(getProductsByCategory(id))
+        }
+
         if (query.id) {
             getProducts(query.id)
         }
-    }, [query])
+    }, [query, dispatch])
 
     return (
         <>
@@ -39,14 +38,18 @@ function Detail() {
                 <link rel="icon" href="/page-detail-category.png" />
             </Head>
             <Layout>
-                <Section style={{ backgroundImage: 'linear-gradient(135deg, #9796f0 10%, #FBC7D4 100%)' }}>
+                <Section>
                     <SectionContent>
-                        {loading ? <div>loading....</div>
-                            : products && <List
-                                data={products}
-                                item={ProductItem}
-                                style={{ gridTemplateColumns: 'repeat(6, 1fr)' }}
-                            />}
+                        {loading ? (
+                            <div>loading....</div>
+                        ) : (
+                            products && (
+                                <List
+                                    data={products}
+                                    item={ProductItem}
+                                />
+                            )
+                        )}
                     </SectionContent>
                 </Section>
             </Layout>

@@ -2,17 +2,3 @@
     display: grid;
     grid-template-columns: 240px 1fr;
 }
-
-@media (max-width: 480px) {
-    .main {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (min-width: 481px) and (max-width: 640px) {}
-
-@media (min-width: 641px) and (max-width: 768px) {}
-
-@media (min-width: 769px) and (max-width: 1007px) {}
-
-@media (min-width: 1008px) and (max-width: 1200px) {}

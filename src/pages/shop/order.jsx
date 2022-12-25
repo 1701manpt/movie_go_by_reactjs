@@ -1,22 +1,21 @@
 // reactjs
-import { useEffect } from "react"
+import { useEffect } from 'react'
 
 // nextjs
-import Head from "next/head"
+import Head from 'next/head'
 
 // redux
-import { useDispatch, useSelector } from "react-redux"
-import { getAll } from "../../redux/callApi/order"
+import { useDispatch, useSelector } from 'react-redux'
+import { getAll } from 'redux/callApi/order'
 
 // layouts
-import SidebarLayout from "../../layouts/sidebarLayout"
+import SidebarLayout from 'layouts/sidebarLayout'
 
 // components
-import Authentication from "../../components/authentication"
-import BasicItem, { SidebarData } from "../../components/sidebar/basic"
+import Authentication from 'components/authentication'
+import BasicItem, { SidebarData } from 'components/sidebar/basic'
 
 function Order() {
-
     const dispatch = useDispatch()
 
     const user = useSelector((state) => state.auth.login.currentUser)
@@ -24,7 +23,7 @@ function Order() {
 
     useEffect(() => {
         dispatch(getAll(user))
-    }, [])
+    }, [dispatch, user])
 
     return (
         <Authentication>
@@ -44,15 +43,14 @@ function Order() {
                             </tr>
                         </thead>
                         <tbody>
-                            {
-                                list && list?.map((item, i) => (
+                            {list &&
+                                list?.map((item, i) => (
                                     <tr key={i}>
                                         <td style={{ border: '1px solid black' }}>{item.id}</td>
                                         <td style={{ border: '1px solid black' }}>{item.orderStatusId}</td>
                                         <td style={{ border: '1px solid black' }}>{item.createdAt}</td>
                                     </tr>
-                                ))
-                            }
+                                ))}
                         </tbody>
                     </table>
                 </div>

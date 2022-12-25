@@ -1,11 +1,10 @@
 import { useRouter } from 'next/router'
 
-import Login from '../../pages/shop/login';
+import Login from '../../pages/shop/login'
 
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'
 
 function Authentication({ children }) {
-
     const router = useRouter()
     const user = useSelector((state) => state.auth.login.currentUser)
 
@@ -13,15 +12,7 @@ function Authentication({ children }) {
         router.push('/shop/login')
     }
 
-    return (
-        <>
-            {
-                user
-                    ? children
-                    : <Login />
-            }
-        </>
-    )
+    return <>{user ? children : <Login />}</>
 }
 
-export default Authentication;
+export default Authentication

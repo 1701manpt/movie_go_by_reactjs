@@ -1,33 +1,33 @@
-import Head from "next/head"
-import { useEffect } from "react"
-import { useRouter } from "next/router"
+import Head from 'next/head'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 // components
-import Section, { SectionContent } from "../../../../components/section"
+import Section, { SectionContent } from 'components/section'
 
 // layouts
-import Layout from "../../../../layouts"
+import Layout from 'layouts'
 
 // redux
-import { useDispatch, useSelector } from "react-redux"
-import { getById } from "../../../../redux/callApi/product"
+import { useDispatch, useSelector } from 'react-redux'
+import { getById } from 'redux/callApi/product'
 
 function Detail() {
-
     const dispatch = useDispatch()
     const loading = useSelector((state) => state.product.detail?.loading)
     const product = useSelector((state) => state.product.detail?.data)
 
-    const getProducts = (id) => {
-        dispatch(getById(id))
-    }
-
     const { query } = useRouter()
     useEffect(() => {
+
+        const getProducts = (id) => {
+            dispatch(getById(id))
+        }
+
         if (query.id) {
             getProducts(query.id)
         }
-    }, [query])
+    }, [query, dispatch])
 
     return (
         <>
@@ -37,10 +37,9 @@ function Detail() {
                 <link rel="icon" href="/page-detail-product.png" />
             </Head>
             <Layout>
-                <Section style={{ backgroundImage: 'linear-gradient(135deg, #9796f0 10%, #FBC7D4 100%)' }}>
+                <Section>
                     <SectionContent>
-                        {loading ? <div>loading...</div> :
-                            product && <div>{JSON.stringify(product)}</div>}
+                        {loading ? <div>loading...</div> : product && <div>{JSON.stringify(product)}</div>}
                     </SectionContent>
                 </Section>
             </Layout>

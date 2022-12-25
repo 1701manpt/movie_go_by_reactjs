@@ -5,7 +5,7 @@
     flex-direction: column;
 
     &+.wrapper {
-        margin-top: 16px;
+        margin-top: 8px;
     }
 }
 
@@ -14,18 +14,19 @@
 }
 
 .input {
-    padding: 16px;
+    padding: 12px;
     border-radius: $border-radius;
-    border: 1px solid #868F96;
+    border: 1px solid #868f96;
     outline: none;
 
     &:focus {
-        border: 1px solid $color-title;
-        caret-color: $color-title;
+        border: 1px solid #0E197D;
+        caret-color: #0E197D;
     }
 }
 
 .error {
     color: $color-error;
     min-height: 1.4rem;
+    font-size: 0.75em;
 }
