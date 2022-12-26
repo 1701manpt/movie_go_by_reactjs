@@ -1,4 +1,4 @@
-@import '../styles/import.scss';
+@import '~/styles/import.scss';
 
 .root {
     min-width: 100%;
@@ -9,7 +9,7 @@
 }
 
 .container {
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.05);
     width: 100%;
 
     @include breakpoint(sm) {
@@ -37,8 +37,12 @@
     margin-top: $header-height;
     padding: 32px;
     padding-bottom: 128px;
+    min-height: -webkit-fill-available;
     min-height: calc(100vh - 84px);
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @include breakpoint(lg) {
+    }
 }

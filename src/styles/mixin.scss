@@ -1,5 +1,4 @@
 @mixin breakpoint($breakpoint, $direction: min) {
-
     //check if the supplied breakpoint exists in our breakpoits map
     @if map-has-key($breakpoints, $breakpoint) {
         $breakpoint-values: map-get($breakpoints, $breakpoint);
@@ -11,25 +10,19 @@
             @media (min-width: $breakpoint-min) {
                 @content;
             }
-        }
-
-        @else {
+        } @else {
             @media (max-width: $breakpoint-max) {
                 @content;
             }
         }
 
         // use the custom value if the breakpoint is not part of the pre-defined list
-    }
-
-    @else {
+    } @else {
         @if $direction ==min {
             @media (min-width: $breakpoint) {
                 @content;
             }
-        }
-
-        @else {
+        } @else {
             @media (max-width: $breakpoint) {
                 @content;
             }

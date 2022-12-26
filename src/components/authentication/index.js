@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-import Login from '../../pages/shop/login'
+import Login from '~/pages/shop/login'
 
 import { useSelector } from 'react-redux'
 

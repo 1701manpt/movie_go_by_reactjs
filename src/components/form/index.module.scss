@@ -1,4 +1,4 @@
-@import '../../styles/import.scss';
+@import '~/styles/import.scss';
 
 .wrapper {
     background-image: linear-gradient(-135deg, #f5f7fa 10%, #c3cfe2 100%);
@@ -30,7 +30,7 @@
     justify-content: flex-end;
     padding: 8px 16px;
     padding-top: 16px;
-    color: #3F0D12;
+    color: #3f0d12;
     text-transform: uppercase;
 
     &:hover {
@@ -45,6 +45,6 @@
     border-radius: $border-radius;
     box-shadow: $box-shadow;
     color: whitesmoke;
-    background-image: linear-gradient(135deg, #EC9F05 10%, #FF4E00 100%);
+    background-image: linear-gradient(135deg, #ec9f05 10%, #ff4e00 100%);
     width: 360px;
 }

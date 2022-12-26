@@ -1,5 +1,7 @@
-import Footer from '../components/footer'
-import Header from '../components/header'
+import Footer from '~/components/footer'
+import Header from '~/components/header'
+
+// styles
 import styles from './index.module.scss'
 
 function Layout({ children }) {

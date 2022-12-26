@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getById } from '../callApi/customer'
+import { getById } from '~/redux/callApi/customer'
 
 const initialState = {
     personal: {

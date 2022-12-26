@@ -1,0 +1,24 @@
+@import '~/styles/import.scss';
+
+.main {
+    display: flex;
+    flex-direction: column;
+
+    @include breakpoint(xl) {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+    }
+}
+
+.content {
+    margin-top: $header-height;
+    padding: 32px;
+    padding-bottom: 128px;
+    min-height: -webkit-fill-available;
+    min-height: calc(100vh - 84px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include breakpoint(lg) {}
+}

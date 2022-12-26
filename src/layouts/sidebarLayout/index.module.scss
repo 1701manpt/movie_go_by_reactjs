@@ -1,4 +1,11 @@
+@import '~/styles/import.scss';
+
 .main {
-    display: grid;
-    grid-template-columns: 240px 1fr;
+    display: flex;
+    flex-direction: column;
+
+    @include breakpoint(xl) {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+    }
 }

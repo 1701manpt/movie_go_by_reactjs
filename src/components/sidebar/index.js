@@ -11,7 +11,14 @@ function Sidebar({ data, title, item: Item }) {
                 {data &&
                     data.map((item, index) => {
                         return (
-                            <Item key={index} data={item} active={(router.pathname === item.path && true) || false} />
+                            <Item
+                                key={index}
+                                data={item}
+                                active={
+                                    (router.pathname === item.path && true) ||
+                                    false
+                                }
+                            />
                         )
                     })}
             </aside>

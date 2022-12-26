@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getAll, getById, getProductsByCategory } from '../callApi/category'
+import {
+    getAll,
+    getById,
+    getProductsByCategory,
+} from '~/redux/callApi/category'
 
 const initialState = {
     list: {

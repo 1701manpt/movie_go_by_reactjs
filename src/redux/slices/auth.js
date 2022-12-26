@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { login, register, logout, refreshToken } from '../callApi/auth'
+import { login, register, logout, refreshToken } from '~/redux/callApi/auth'
 
 const initialState = {
     login: {

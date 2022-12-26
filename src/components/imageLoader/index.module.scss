@@ -1,0 +1,15 @@
+@import '~/styles/import.scss';
+
+.wrapper {
+    // for next/image active good
+    position: relative;
+    height: 180px;
+
+    // coppy from shopee
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+}
+
+.image {
+    object-fit: cover;
+}

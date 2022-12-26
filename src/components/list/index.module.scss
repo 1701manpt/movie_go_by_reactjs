@@ -1,4 +1,4 @@
-@import '../../styles/import.scss';
+@import '~/styles/import.scss';
 
 .wrapper {
     display: grid;
@@ -23,5 +23,11 @@
 
     @include breakpoint(xxl) {
         grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+.hasSidebar {
+    @include breakpoint(xl) {
+        grid-template-columns: repeat(5, 1fr);
     }
 }

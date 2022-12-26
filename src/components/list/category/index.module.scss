@@ -1,4 +1,4 @@
-@import '../../../styles/variables.scss';
+@import '~/styles/import.scss';
 
 .wrapper {
     background-color: white;
@@ -12,22 +12,6 @@
 
     &:hover {
         color: $color-path;
-    }
-}
-
-.image {
-    width: 100%;
-    height: 180px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-
-    // coppy from shopee
-    box-shadow: 0 0.0625rem 0.125rem 0 rgb(0 0 0 / 10%);
-    border-radius: $border-radius;
-
-    &:hover {
-        cursor: pointer;
     }
 }
 

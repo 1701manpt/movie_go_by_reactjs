@@ -1,10 +1,10 @@
-@import '../../../styles/variables.scss';
+@import '~/styles/variables.scss';
 
 .wrapper {
     display: flex;
     flex-direction: column;
 
-    &+.wrapper {
+    & + .wrapper {
         margin-top: 8px;
     }
 }
@@ -20,8 +20,8 @@
     outline: none;
 
     &:focus {
-        border: 1px solid #0E197D;
-        caret-color: #0E197D;
+        border: 1px solid #0e197d;
+        caret-color: #0e197d;
     }
 }
 

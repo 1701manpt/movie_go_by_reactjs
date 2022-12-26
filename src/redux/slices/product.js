@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getAll, getById } from '../callApi/product'
+import { getAll, getById } from '~/redux/callApi/product'
 
 const initialState = {
     list: {

@@ -1,4 +1,4 @@
-@import '../../../styles/variables.scss';
+@import '~/styles/variables.scss';
 
 .wrapper {
     display: grid;
@@ -23,17 +23,6 @@
     border-right: 4px solid $color-path;
     border-left: 4px solid $color-path;
     background-image: linear-gradient(135deg, #fdfbfb 10%, #ebedee 100%);
-}
-
-.image {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    box-shadow: $box-shadow;
-    background-image: linear-gradient(135deg, #f5f7fa 10%, #c3cfe2 100%);
 }
 
 .name {

@@ -1,5 +1,7 @@
-import Image from 'next/image'
 import Link from 'next/link'
+import IconImage from '~/components/iconImage'
+
+// styles
 import styles from './index.module.scss'
 
 export const SidebarData = [
@@ -17,9 +19,12 @@ export const SidebarData = [
 
 function BasicItem({ data, active }) {
     return (
-        <div className={[styles.wrapper, (active && styles.active) || ''].join(' ')}>
-            {/* <div className={styles.image} style={{ backgroundImage: `url(${"https://cf.shopee.vn/file/a0eaa48841d4e8cc80870ae5e89ede92"})` }} alt="Ảnh danh mục" /> */}
-            <Image className={styles.image} src={data.icon} width={50} height={50} alt="Ảnh danh mục" />
+        <div
+            className={[styles.wrapper, (active && styles.active) || ''].join(
+                ' ',
+            )}
+        >
+            <IconImage src={data.icon} />
             <Link className={styles.name} href={data.path}>
                 {data.name}
             </Link>

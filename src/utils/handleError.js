@@ -3,7 +3,10 @@ const handleError = ({ error, rejectWithValue }) => {
         // Request đã được tạo ra và server đã hồi đáp với một mã trạng thái
         // nằm ra ngoài tầm 2xx
         // console.error({ ...error.response.data, status: error.response.status });
-        return rejectWithValue({ ...error.response.data, status: error.response.status })
+        return rejectWithValue({
+            ...error.response.data,
+            status: error.response.status,
+        })
     } else if (error.request) {
         // Request đã được tạo ra nhưng không nhận được hồi đáp nào
         // Trong trình duyệt, `error.request` là instance của XMLHttpRequest

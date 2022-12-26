@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { axiosPrivate } from '../axios'
-import { refreshToken } from '../redux/callApi/auth'
+import { axiosPrivate } from '~/axiosHttp'
+import { refreshToken } from '~/redux/callApi/auth'
 
 const useAxiosPrivate = () => {
     const dispatch = useDispatch()

@@ -1,16 +1,17 @@
 import Link from 'next/link'
+import ImageLoader from '~/components/imageLoader'
 import styles from './index.module.scss'
 
 function ProductItem({ data, ...args }) {
-    const href = '/shop/product/' + data.name.split(' ').join('-') + '/' + data.id
+    const href =
+        '/shop/product/' + data.name.split(' ').join('-') + '/' + data.id
 
     return (
         <div className={styles.wrapper} {...args}>
             <Link href={href}>
-                <div
-                    className={styles.image}
-                    style={{ backgroundImage: `url(${'https://cf.shopee.vn/file/a0eaa48841d4e8cc80870ae5e89ede92'})` }}
-                    alt="Ảnh danh mục"
+                <ImageLoader
+                    href={data.image}
+                    alt={'Ảnh của sản phẩm ' + data.image}
                 />
             </Link>
             <div className={styles.price}>

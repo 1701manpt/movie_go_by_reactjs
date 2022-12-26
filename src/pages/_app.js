@@ -1,4 +1,4 @@
-import '../styles/globals.scss'
+import '~/styles/globals.scss'
 
 // redux
 import { Provider } from 'react-redux'
