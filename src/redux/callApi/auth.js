@@ -22,6 +22,24 @@ export const login = createAsyncThunk(
     },
 )
 
+export const loginAdmin = createAsyncThunk(
+    'auth/loginAdmin',
+    async (data, { rejectWithValue }) => {
+        try {
+            const res = await axios({
+                method: 'POST',
+                url: `/auth/login/admin`,
+                data: data,
+                withCredentials: true,
+            })
+
+            return res.data
+        } catch (error) {
+            return handleError({ error, rejectWithValue })
+        }
+    },
+)
+
 export const register = createAsyncThunk(
     'auth/register',
     async (data, { rejectWithValue }) => {

@@ -1,9 +1,10 @@
 .wrapper {
+    display: inline-block;
+    margin: auto;
+    position: relative;
     width: 40px;
     height: 40px;
-
-    // for next/image active good
-    position: relative;
+    cursor: pointer;
 }
 
 .displayNone {
@@ -11,7 +12,7 @@
 }
 
 .icon {
-    object-fit: cover;
+    object-fit: contain;
     padding: 4px;
     border-radius: 999rem;
     background-image: linear-gradient(135deg, #f5f7fa 10%, #c3cfe2 100%);

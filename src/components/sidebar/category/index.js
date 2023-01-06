@@ -22,6 +22,7 @@ function CategoryItem({ data }) {
                 <Image
                     loader={data.image && (() => data.image)}
                     src='/image-view-default.png'
+                    alt={'Ảnh của danh mục ' + data.image}
                     fill={true}
                 />
             </div>

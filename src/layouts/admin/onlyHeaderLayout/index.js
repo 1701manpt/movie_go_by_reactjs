@@ -1,6 +1,4 @@
 import Header from '~/components/admin/header'
-import Sidebar from '~/components/admin/sidebar'
-import BasicItem, { SidebarData } from '~/components/sidebar/basic'
 
 // styles
 import styles from '../index.module.scss'

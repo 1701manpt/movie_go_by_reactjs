@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {
+    add,
     getAll,
     getById,
     getProductsByCategory,
@@ -24,6 +25,11 @@ const initialState = {
         message: null,
         error: null,
     },
+    add: {
+        loading: false,
+        message: null,
+        error: null,
+    }
 }
 
 export const categorySlice = createSlice({
@@ -89,6 +95,23 @@ export const categorySlice = createSlice({
             state.productList.data = null
             state.productList.message = action.payload.message
             state.productList.error = action.payload.error
+        })
+
+        // add category
+        builder.addCase(add.pending, (state, action) => {
+            state.add.loading = true
+            state.add.message = null
+            state.add.error = null
+        })
+        builder.addCase(add.fulfilled, (state, action) => {
+            state.add.loading = false
+            state.add.message = action.payload.message
+            state.add.error = null
+        })
+        builder.addCase(add.rejected, (state, action) => {
+            state.add.loading = false
+            state.add.message = action.payload.message
+            state.add.error = action.payload.error
         })
     },
 })

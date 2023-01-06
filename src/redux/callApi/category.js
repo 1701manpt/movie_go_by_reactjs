@@ -49,3 +49,20 @@ export const getProductsByCategory = createAsyncThunk(
         }
     },
 )
+
+export const add = createAsyncThunk(
+    'category/add',
+    async (data, { rejectWithValue }) => {
+        try {
+            const res = await axios({
+                method: 'POST',
+                url: `/categories`,
+                data: data,
+            })
+
+            return res.data
+        } catch (error) {
+            return handleError({ error, rejectWithValue })
+        }
+    },
+)

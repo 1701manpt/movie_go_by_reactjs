@@ -2,19 +2,53 @@
 
 .wrapper {
     position: sticky;
-    top: 84px;
-    height: calc(100vh - 84px);
+    top: $header-height-sm;
+    height: calc(100vh - $header-height-sm);
     box-shadow: $box-shadow;
     background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    z-index: 100;
+
+    @include breakpoint(xl) {
+        top: $header-height;
+        height: calc(100vh - $header-height);
+    }
+
+    &.active {
+        display: none;
+
+        @include breakpoint(xl) {
+            display: block;
+        }
+    }
 }
 
 .content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: auto;
-    padding: 16px;
+    height: 100%;
     width: 100%;
+    padding: 16px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        border-radius: 0;
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, 0.25);
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    &::-webkit-scrollbar-track {
+        border-radius: 0;
+        background-color: rgba(0, 0, 0, 0);
+    }
 }
 
 .title {

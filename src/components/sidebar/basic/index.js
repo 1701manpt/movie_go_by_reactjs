@@ -8,7 +8,7 @@ export const SidebarData = [
     {
         path: '/shop/account',
         name: 'Thông tin cá nhân',
-        icon: '/icon-info.png',
+        icon: '/icon-myInfo.png',
     },
     {
         path: '/shop/order',
@@ -17,12 +17,14 @@ export const SidebarData = [
     },
 ]
 
-function BasicItem({ data, active }) {
+function BasicItem({ data, active, ...args }) {
     return (
         <div
-            className={[styles.wrapper, (active && styles.active) || ''].join(
-                ' ',
-            )}
+            className={[
+                styles.wrapper,
+                (active && styles.active) || ''
+            ].join(' ')}
+            {...args}
         >
             <IconImage src={data.icon} />
             <Link className={styles.name} href={data.path}>

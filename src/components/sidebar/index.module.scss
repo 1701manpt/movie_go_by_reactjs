@@ -1,8 +1,13 @@
 @import '~/styles/import.scss';
 
 .wrapper {
-    margin-top: $header-height;
     box-shadow: $box-shadow;
+    min-height: -webkit-fill-available;
+    min-height: calc(100vh - $header-height-sm);
+
+    @include breakpoint(xl) {
+        min-height: calc(100vh - $header-height);
+    }
 }
 
 .content {

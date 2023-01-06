@@ -2,7 +2,11 @@
 
 // nextjs
 import Head from 'next/head'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Authentication from '~/components/authentication/admin'
+import Section, { SectionContent, SectionTitle } from '~/components/section'
+import Table, { fieldUser, TableBody, TableHeader } from '~/components/table'
 
 // components
 
@@ -12,6 +16,14 @@ import Layout from '~/layouts/admin'
 // redux
 
 export default function ManageUser() {
+
+    // const dispatch = useDispatch()
+    // const productList = useSelector((state) => state.user.list.data)
+    // const loading = useSelector((state) => state.user.list.loading)
+
+    // useEffect(() => {
+    //     dispatch(getAll())
+    // }, [dispatch])
 
     return (
         <Authentication>
@@ -24,7 +36,26 @@ export default function ManageUser() {
                 <link rel='icon' href='/icon-manage-user.png' />
             </Head>
             <Layout>
-                Quản lý người dùng
+                <Section>
+                    <SectionTitle>Danh sách người dùng</SectionTitle>
+                    <SectionContent>
+                        <Table>
+                            <TableHeader data={fieldUser} />
+                            <TableBody>
+                                {/* {loading
+                                    ? <Row><Cell colSpan={8} center>loading....</Cell></Row>
+                                    : productList.length <= 0
+                                        ? <Row><Cell colSpan={8} center>Không có dữ liệu</Cell></Row>
+                                        : productList.map((product, i) => {
+                                            return (
+                                                <ProductItem data={product} index={i} />
+                                            )
+                                        })
+                                } */}
+                            </TableBody>
+                        </Table>
+                    </SectionContent>
+                </Section>
             </Layout>
         </Authentication>
     )

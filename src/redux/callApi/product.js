@@ -33,3 +33,21 @@ export const getById = createAsyncThunk(
         }
     },
 )
+
+export const add = createAsyncThunk(
+    'product/add',
+    async (data, { rejectWithValue }) => {
+        try {
+            console.log(data);
+            const res = await axios({
+                method: 'POST',
+                url: `/products`,
+                data: data,
+            })
+
+            return res.data
+        } catch (error) {
+            return handleError({ error, rejectWithValue })
+        }
+    },
+)

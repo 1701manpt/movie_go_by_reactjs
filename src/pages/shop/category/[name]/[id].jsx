@@ -48,7 +48,7 @@ function Detail() {
                     <SectionContent>
                         {loading ? (
                             <div>loading....</div>
-                        ) : products.length <= 0 ? (
+                        ) : !products ? (
                             <div>Không có sản phẩm</div>
                         ) : (
                             <List data={products} item={ProductItem} />

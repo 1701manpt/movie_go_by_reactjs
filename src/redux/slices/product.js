@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getAll, getById } from '~/redux/callApi/product'
+import { add, getAll, getById } from '~/redux/callApi/product'
 
 const initialState = {
     list: {
@@ -14,6 +14,11 @@ const initialState = {
         message: null,
         error: null,
     },
+    add: {
+        loading: false,
+        message: null,
+        error: null,
+    }
 }
 
 export const productSlice = createSlice({
@@ -59,6 +64,23 @@ export const productSlice = createSlice({
             state.detail.data = null
             state.detail.message = action.payload.message
             state.detail.error = action.payload.error
+        })
+
+        // add product
+        builder.addCase(add.pending, (state, action) => {
+            state.add.loading = true
+            state.add.message = null
+            state.add.error = null
+        })
+        builder.addCase(add.fulfilled, (state, action) => {
+            state.add.loading = false
+            state.add.message = action.payload.message
+            state.add.error = null
+        })
+        builder.addCase(add.rejected, (state, action) => {
+            state.add.loading = false
+            state.add.message = action.payload.message
+            state.add.error = action.payload.error
         })
     },
 })

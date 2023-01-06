@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { login, register, logout, refreshToken } from '~/redux/callApi/auth'
+import { login, register, logout, refreshToken, loginAdmin } from '~/redux/callApi/auth'
 
 const initialState = {
     login: {
@@ -122,6 +122,26 @@ export const authSlice = createSlice({
             state.refresh.loading = false
             state.refresh.message = action.payload.message
             state.refresh.error = action.payload.error
+        })
+
+        // login admin
+        builder.addCase(loginAdmin.pending, (state, action) => {
+            state.login.currentUser = null
+            state.login.loading = true
+            state.login.message = null
+            state.login.error = null
+        })
+        builder.addCase(loginAdmin.fulfilled, (state, action) => {
+            state.login.currentUser = action.payload.data
+            state.login.loading = false
+            state.login.message = action.payload.message
+            state.login.error = null
+        })
+        builder.addCase(loginAdmin.rejected, (state, action) => {
+            state.login.currentUser = null
+            state.login.loading = false
+            state.login.message = action.payload.message
+            state.login.error = action.payload.error
         })
     },
 })

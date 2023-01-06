@@ -11,14 +11,16 @@
 }
 
 .content {
-    margin-top: $header-height;
-    padding: 32px;
     padding-bottom: 128px;
     min-height: -webkit-fill-available;
-    min-height: calc(100vh - 84px);
+    min-height: calc(100vh - $header-height-sm);
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 16px;
 
-    @include breakpoint(lg) {}
+    @include breakpoint(xl) {
+        padding: 32px;
+        min-height: calc(100vh - $header-height);
+    }
 }

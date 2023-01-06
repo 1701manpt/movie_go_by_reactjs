@@ -1,12 +1,77 @@
+@import '~/styles/import.scss';
+
 .wrapper {
-    overflow: scroll;
-    width: 50%;
+    overflow: auto;
+    // width: calc(100vw - 32px * 2 - 16px * 2);
+
+    @include breakpoint(xl) {
+        // width: calc(100vw - 240px - 32px * 2 - 16px * 2);
+    }
 }
 
 .table {
-    width: auto;
+    width: 100%;
 }
 
-.header {}
+.header {
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+}
 
 .body {}
+
+.row {
+    width: 100%;
+    background-color: white;
+
+    &.highlight {
+        background-color: #F5F7FA;
+    }
+}
+
+.image {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+
+.eclipse {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    max-height: calc(1.4em * 4);
+}
+
+.cell {
+    padding: 8px;
+
+    &.center {
+        display: flexbox;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    &.action {
+        // background-color: unset;
+        width: 56px;
+        // border: 1px solid white;
+    }
+
+    &.bold {
+        font-weight: bold;
+    }
+
+    &.minWidth {
+        min-width: 240px;
+    }
+
+    &.maxWidth {
+        width: 500px;
+    }
+}
