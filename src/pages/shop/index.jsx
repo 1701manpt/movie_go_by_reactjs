@@ -52,7 +52,7 @@ export default function Shop() {
                     <SectionContent>
                         {categoryList.loading ? (
                             <div>loading....</div>
-                        ) : categoryList.data.length <= 0 ? (
+                        ) : categoryList.data?.length <= 0 ? (
                             <div>Không có danh mục</div>
                         ) : (
                             <List
@@ -67,7 +67,7 @@ export default function Shop() {
                     <SectionContent>
                         {productList.loading ? (
                             <div>loading....</div>
-                        ) : productList.data.length <= 0 ? (
+                        ) : productList.data?.length <= 0 ? (
                             <div>Không có sản phẩm</div>
                         ) : (
                             <List data={productList.data} item={ProductItem} />
@@ -79,7 +79,7 @@ export default function Shop() {
                     <SectionContent>
                         {productList.loading ? (
                             <div>loading....</div>
-                        ) : productList.data.length <= 0 ? (
+                        ) : productList.data?.length <= 0 ? (
                             <div>Không có sản phẩm</div>
                         ) : (
                             <List data={productList.data} item={ProductItem} />

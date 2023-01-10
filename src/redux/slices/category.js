@@ -29,7 +29,7 @@ const initialState = {
         loading: false,
         message: null,
         error: null,
-    }
+    },
 }
 
 export const categorySlice = createSlice({
@@ -97,7 +97,7 @@ export const categorySlice = createSlice({
             state.productList.error = action.payload.error
         })
 
-        // add category
+        // add
         builder.addCase(add.pending, (state, action) => {
             state.add.loading = true
             state.add.message = null

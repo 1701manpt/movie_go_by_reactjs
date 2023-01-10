@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleMenu } from '~/redux/slices/menu'
+import { toggleMenu } from '~/redux/slices/ui'
 import styles from './index.module.scss'
 
 export const SidebarData = [
-    // {
-    //     path: '/admin',
-    //     name: 'Trang chủ',
-    //     icon: '/icon-home.png',
-    // },
+    {
+        path: '/admin#thaiphuongnam',
+        name: 'Trang chủ',
+        icon: '/icon-home.png',
+    },
     {
         path: '/admin/manage-user',
         name: 'Quản lý người dùng',
@@ -46,18 +46,30 @@ export const SidebarData = [
     },
 ]
 
-function Sidebar({ data, title, item: Item }) {
+export const AccountSidebar = [
+    {
+        path: '/admin',
+        name: 'Trang chủ',
+        icon: '/icon-home.png',
+    },
+    {
+        path: '/admin/account',
+        name: 'Thông tin cá nhân',
+        icon: '/icon-account.png',
+    },
+]
 
+function Sidebar({ data, title, item: Item }) {
     const dispatch = useDispatch()
     const router = useRouter()
-    const toggle = useSelector((state) => state.menu.toggleMenu)
+    const menuStatus = useSelector((state) => state.ui.menu.status)
 
     const handleToggleMenu = () => {
         dispatch(toggleMenu())
     }
 
     return (
-        <div className={[styles.wrapper, toggle && styles.active].join(' ')}>
+        <div className={[styles.wrapper, menuStatus && styles.active].join(' ')}>
             {title && <div className={styles.title}>{title}</div>}
             <aside className={styles.content}>
                 {data &&
@@ -68,10 +80,7 @@ function Sidebar({ data, title, item: Item }) {
                                 key={index}
                                 data={item}
                                 active={
-                                    (
-                                        router.pathname.includes(item.path) && true
-                                    ) ||
-                                    false
+                                    router.pathname.split('/')[2] == item.path.split('/')[2] && true
                                 }
                             />
                         )

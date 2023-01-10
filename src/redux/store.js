@@ -1,10 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import customerReducer from '~/redux/slices/customer'
+import employeeReducer from '~/redux/slices/employee'
+import userReducer from '~/redux/slices/user'
+import roleReducer from '~/redux/slices/role'
 import authReducer from '~/redux/slices/auth'
 import productReducer from '~/redux/slices/product'
 import orderReducer from '~/redux/slices/order'
 import categoryReducer from '~/redux/slices/category'
-import menuReducer from '~/redux/slices/menu'
+import uiReducer from '~/redux/slices/ui'
 
 // redux persist
 import storage from 'redux-persist/lib/storage'
@@ -26,11 +29,14 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     customer: customerReducer,
+    employee: employeeReducer,
+    user: userReducer,
+    role: roleReducer,
     auth: authReducer,
     product: productReducer,
     order: orderReducer,
     category: categoryReducer,
-    menu: menuReducer,
+    ui: uiReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

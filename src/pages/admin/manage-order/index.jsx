@@ -12,7 +12,6 @@ import Layout from '~/layouts/admin'
 // redux
 
 export default function ManageCustomer() {
-
     return (
         <Authentication>
             <Head>
@@ -23,9 +22,7 @@ export default function ManageCustomer() {
                 />
                 <link rel='icon' href='/icon-manage-order.png' />
             </Head>
-            <Layout>
-                Quản lý đơn hàng
-            </Layout>
+            <Layout>Quản lý đơn hàng</Layout>
         </Authentication>
     )
 }

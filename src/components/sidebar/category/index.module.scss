@@ -10,7 +10,7 @@
     box-shadow: $box-shadow;
     cursor: pointer;
 
-    & + .wrapper {
+    &+.wrapper {
         margin-top: 8px;
     }
 

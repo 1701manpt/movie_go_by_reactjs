@@ -20,10 +20,9 @@ export const SidebarData = [
 function BasicItem({ data, active, ...args }) {
     return (
         <div
-            className={[
-                styles.wrapper,
-                (active && styles.active) || ''
-            ].join(' ')}
+            className={[styles.wrapper, (active && styles.active) || ''].join(
+                ' ',
+            )}
             {...args}
         >
             <IconImage src={data.icon} />

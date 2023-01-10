@@ -23,6 +23,8 @@ import Form, {
 } from '~/components/form'
 import Input from '~/components/form/input'
 import Button from '~/components/button'
+import Alert from '~/components/alert'
+import { toggleAlert } from '~/redux/slices/ui'
 
 function Login() {
     const router = useRouter()
@@ -32,7 +34,6 @@ function Login() {
     const message = useSelector((state) => state.auth.login.message)
 
     const [state, setState] = useState({})
-    const [showResult, setShowResult] = useState(false)
 
     const onChangeState = (e) => {
         setState({
@@ -41,7 +42,7 @@ function Login() {
         })
     }
     const handleLogin = () => {
-        setShowResult(true)
+        dispatch(toggleAlert({ status: true }))
         dispatch(login(state))
     }
 
@@ -67,43 +68,41 @@ function Login() {
                 />
                 <link rel='icon' href='/icon-login.png' />
             </Head>
+            <Alert position={['right', 'top']} type={user && 'success' || 'fail'}>{message}</Alert>
             <Layout>
-                <div>
-                    {showResult && <FormResult>{message}</FormResult>}
-                    <Form>
-                        <FormTitle>Đăng nhập</FormTitle>
-                        <FormContent>
-                            <Input
-                                label='Tài khoản'
-                                type='text'
-                                name='account'
-                                placeholder='Enter your account'
-                                onChange={(e) => {
-                                    onChangeState(e)
-                                }}
-                                error={validation}
-                            />
-                            <Input
-                                label='Mật khẩu'
-                                type='password'
-                                name='password'
-                                placeholder='Enter your password'
-                                onChange={(e) => {
-                                    onChangeState(e)
-                                }}
-                                error={validation}
-                            />
-                        </FormContent>
-                        <FormAction>
-                            <Button fill type='submit' onClick={handleLogin}>
-                                Login
-                            </Button>
-                        </FormAction>
-                        <FormFooter>
-                            <Link href='/shop/register'>Đi đến đăng ký</Link>
-                        </FormFooter>
-                    </Form>
-                </div>
+                <Form>
+                    <FormTitle>Đăng nhập</FormTitle>
+                    <FormContent>
+                        <Input
+                            label='Tài khoản'
+                            type='text'
+                            name='account'
+                            placeholder='Enter your account'
+                            onChange={(e) => {
+                                onChangeState(e)
+                            }}
+                            error={validation}
+                        />
+                        <Input
+                            label='Mật khẩu'
+                            type='password'
+                            name='password'
+                            placeholder='Enter your password'
+                            onChange={(e) => {
+                                onChangeState(e)
+                            }}
+                            error={validation}
+                        />
+                    </FormContent>
+                    <FormAction>
+                        <Button fill type='submit' onClick={handleLogin}>
+                            Login
+                        </Button>
+                    </FormAction>
+                    <FormFooter>
+                        <Link href='/shop/register'>Đi đến đăng ký</Link>
+                    </FormFooter>
+                </Form>
             </Layout>
         </>
     )

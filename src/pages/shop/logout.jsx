@@ -14,15 +14,17 @@ import { logout } from '~/redux/callApi/auth'
 // hooks
 import { FormResult } from '~/components/form'
 import useAxiosPrivate from '~/hooks/useAxiosPrivate'
+import Alert from '~/components/alert'
+import { toggleAlert } from '~/redux/slices/ui'
 
 function Logout() {
     const dispatch = useDispatch()
     const axiosPrivate = useAxiosPrivate()
     const user = useSelector((state) => state.auth.login.currentUser)
-    const loading = useSelector((state) => state.auth.logout.loading)
 
     useEffect(() => {
         const dispatchLogout = setTimeout(() => {
+            dispatch(toggleAlert({ status: true }))
             dispatch(logout({ user, axiosPrivate }))
         }, 750)
 
@@ -41,8 +43,8 @@ function Logout() {
                 />
                 <link rel='icon' href='/icon-logout.png' />
             </Head>
+            <Alert position={['right', 'top']}>Đang đăng xuất....</Alert>
             <Layout>
-                <FormResult>Đang đăng xuất....</FormResult>
             </Layout>
         </Authentication>
     )

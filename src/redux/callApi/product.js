@@ -36,10 +36,9 @@ export const getById = createAsyncThunk(
 
 export const add = createAsyncThunk(
     'product/add',
-    async (data, { rejectWithValue }) => {
+    async ({ data, axiosPrivate }, { rejectWithValue }) => {
         try {
-            console.log(data);
-            const res = await axios({
+            const res = await axiosPrivate({
                 method: 'POST',
                 url: `/products`,
                 data: data,

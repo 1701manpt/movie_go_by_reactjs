@@ -2,16 +2,32 @@
 
 // nextjs
 import Head from 'next/head'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Authentication from '~/components/authentication/admin'
+import Section, { SectionContent, SectionTitle } from '~/components/section'
+import Table, { Cell, CustomerItem, fieldCustomer, Row, TableBody, TableHeader } from '~/components/table'
+import useAxiosPrivate from '~/hooks/useAxiosPrivate'
 
 // components
 
 // layouts
 import Layout from '~/layouts/admin'
+import { getAll } from '~/redux/callApi/customer'
 
 // redux
 
 export default function ManageCustomer() {
+
+    const dispatch = useDispatch()
+    const axiosPrivate = useAxiosPrivate()
+    const user = useSelector(state => state.auth.login.currentUser)
+    const loading = useSelector(state => state.customer.list.loading)
+    const list = useSelector(state => state.customer.list.data)
+
+    useEffect(() => {
+        dispatch(getAll({ user, axiosPrivate }))
+    }, [dispatch, user, axiosPrivate])
 
     return (
         <Authentication>
@@ -24,7 +40,39 @@ export default function ManageCustomer() {
                 <link rel='icon' href='/icon-manage-customer.png' />
             </Head>
             <Layout>
-                Quản lý khách hàng
+                <Section>
+                    <SectionTitle>Danh sách nhân viên</SectionTitle>
+                    <SectionContent>
+                        <Table>
+                            <TableHeader data={fieldCustomer} />
+                            <TableBody>
+                                {loading ? (
+                                    <Row>
+                                        <Cell colSpan={Number(fieldCustomer.length + 4)} center>
+                                            loading....
+                                        </Cell>
+                                    </Row>
+                                ) : list?.length <= 0 ? (
+                                    <Row>
+                                        <Cell colSpan={Number(fieldCustomer.length + 4)} center>
+                                            Không có dữ liệu
+                                        </Cell>
+                                    </Row>
+                                ) : (
+                                    list?.map((product, i) => {
+                                        return (
+                                            <CustomerItem
+                                                data={product}
+                                                key={i}
+                                                index={i}
+                                            />
+                                        )
+                                    })
+                                )}
+                            </TableBody>
+                        </Table>
+                    </SectionContent>
+                </Section>
             </Layout>
         </Authentication>
     )

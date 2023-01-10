@@ -10,7 +10,6 @@ import IconImage from '~/components/iconImage'
 import { useState } from 'react'
 
 function Header() {
-
     const user = useSelector((state) => state.auth.login.currentUser)
 
     const [toggleMenu, setToggleMenu] = useState(false)
@@ -28,6 +27,9 @@ function Header() {
                             src='/icon-shop.png'
                             alt='Store Online Logo'
                             fill={true}
+                            sizes="(max-width: 768px) 100vw,
+                            (max-width: 1200px) 50vw,
+                            33vw"
                         />
                     </div>
                 </Link>
@@ -64,11 +66,18 @@ function Header() {
                         <IconImage src='/icon-login.png' />
                     </Link>
                 )}
-                <div className={[styles.iconMenu, styles.iconContainer].join(' ')} onClick={handleToggleMenu}>
+                <div
+                    className={[styles.iconMenu, styles.iconContainer].join(
+                        ' ',
+                    )}
+                    onClick={handleToggleMenu}
+                >
                     <IconImage src='/icon-menu.png' />
                 </div>
             </div>
-            <div className={[styles.menu, toggleMenu && styles.active].join(' ')}>
+            <div
+                className={[styles.menu, toggleMenu && styles.active].join(' ')}
+            >
                 <Link className={styles.item} href='/shop/product'>
                     Danh sách sản phẩm
                 </Link>

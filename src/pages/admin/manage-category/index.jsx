@@ -8,7 +8,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import Authentication from '~/components/authentication/admin'
 import Button from '~/components/button'
 import Section, { SectionContent, SectionTitle } from '~/components/section'
-import Table, { CategoryItem, Cell, fieldCategory, Row, TableBody, TableHeader } from '~/components/table'
+import Table, {
+    CategoryItem,
+    Cell,
+    fieldCategory,
+    Row,
+    TableBody,
+    TableHeader,
+} from '~/components/table'
 
 // components
 
@@ -19,7 +26,6 @@ import { getAll } from '~/redux/callApi/category'
 // redux
 
 export default function ManageCustomer() {
-
     const dispatch = useDispatch()
     const categoryList = useSelector((state) => state.category.list.data)
     const loading = useSelector((state) => state.category.list.loading)
@@ -41,7 +47,9 @@ export default function ManageCustomer() {
             <Layout>
                 <Section>
                     <SectionContent>
-                        <Link href='/admin/manage-category/add'><Button>Thêm danh mục mới</Button></Link>
+                        <Link href='/admin/manage-category/add'>
+                            <Button>Thêm danh mục mới</Button>
+                        </Link>
                     </SectionContent>
                 </Section>
                 <Section>
@@ -50,16 +58,29 @@ export default function ManageCustomer() {
                         <Table>
                             <TableHeader data={fieldCategory} />
                             <TableBody>
-                                {loading
-                                    ? <Row><Cell colSpan={8} center>loading....</Cell></Row>
-                                    : !categoryList
-                                        ? <Row><Cell colSpan={8} center>Không có dữ liệu</Cell></Row>
-                                        : categoryList.map((item, i) => {
-                                            return (
-                                                <CategoryItem data={item} index={i} />
-                                            )
-                                        })
-                                }
+                                {loading ? (
+                                    <Row>
+                                        <Cell colSpan={8} center>
+                                            loading....
+                                        </Cell>
+                                    </Row>
+                                ) : categoryList?.length <= 0 ? (
+                                    <Row>
+                                        <Cell colSpan={8} center>
+                                            Không có dữ liệu
+                                        </Cell>
+                                    </Row>
+                                ) : (
+                                    categoryList?.map((item, i) => {
+                                        return (
+                                            <CategoryItem
+                                                data={item}
+                                                key={i}
+                                                index={i}
+                                            />
+                                        )
+                                    })
+                                )}
                             </TableBody>
                         </Table>
                     </SectionContent>

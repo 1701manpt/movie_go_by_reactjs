@@ -16,3 +16,19 @@ export const getById = createAsyncThunk(
         }
     },
 )
+
+export const getAll = createAsyncThunk(
+    'customer/getAll',
+    async ({ axiosPrivate }, { rejectWithValue }) => {
+        try {
+            const res = await axiosPrivate({
+                method: 'GET',
+                url: `/customers`,
+            })
+
+            return res.data
+        } catch (error) {
+            return handleError({ error, rejectWithValue })
+        }
+    },
+)

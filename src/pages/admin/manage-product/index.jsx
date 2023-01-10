@@ -6,7 +6,14 @@ import Head from 'next/head'
 // components
 import Authentication from '~/components/authentication/admin'
 import Section, { SectionContent, SectionTitle } from '~/components/section'
-import Table, { Cell, ProductItem, fieldProduct, Row, TableBody, TableHeader } from '~/components/table'
+import Table, {
+    Cell,
+    ProductItem,
+    fieldProduct,
+    Row,
+    TableBody,
+    TableHeader,
+} from '~/components/table'
 
 // layouts
 import { useEffect } from 'react'
@@ -19,7 +26,6 @@ import Button from '~/components/button'
 import { getAll } from '~/redux/callApi/product'
 
 export default function ManageCustomer() {
-
     const dispatch = useDispatch()
     const productList = useSelector((state) => state.product.list?.data)
     const loading = useSelector((state) => state.product.list.loading)
@@ -41,7 +47,9 @@ export default function ManageCustomer() {
             <Layout>
                 <Section>
                     <SectionContent>
-                        <Link href='/admin/manage-product/add'><Button>Thêm sản phẩm mới</Button></Link>
+                        <Link href='/admin/manage-product/add'>
+                            <Button>Thêm sản phẩm mới</Button>
+                        </Link>
                     </SectionContent>
                 </Section>
                 <Section>
@@ -50,16 +58,29 @@ export default function ManageCustomer() {
                         <Table>
                             <TableHeader data={fieldProduct} />
                             <TableBody>
-                                {loading
-                                    ? <Row><Cell colSpan={8} center>loading....</Cell></Row>
-                                    : !productList
-                                        ? <Row><Cell colSpan={8} center>Không có dữ liệu</Cell></Row>
-                                        : productList.map((product, i) => {
-                                            return (
-                                                <ProductItem data={product} index={i} />
-                                            )
-                                        })
-                                }
+                                {loading ? (
+                                    <Row>
+                                        <Cell colSpan={8} center>
+                                            loading....
+                                        </Cell>
+                                    </Row>
+                                ) : productList?.length <= 0 ? (
+                                    <Row>
+                                        <Cell colSpan={8} center>
+                                            Không có dữ liệu
+                                        </Cell>
+                                    </Row>
+                                ) : (
+                                    productList?.map((product, i) => {
+                                        return (
+                                            <ProductItem
+                                                data={product}
+                                                key={i}
+                                                index={i}
+                                            />
+                                        )
+                                    })
+                                )}
                             </TableBody>
                         </Table>
                     </SectionContent>

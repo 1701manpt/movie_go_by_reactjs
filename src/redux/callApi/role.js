@@ -2,12 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import handleError from '~/utils/handleError'
 
 export const getAll = createAsyncThunk(
-    'user/getAll',
+    'role/getAll',
     async ({ axiosPrivate }, { rejectWithValue }) => {
         try {
             const res = await axiosPrivate({
                 method: 'GET',
-                url: `/users`,
+                url: `/roles`,
             })
 
             return res.data

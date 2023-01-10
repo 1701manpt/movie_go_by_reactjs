@@ -53,16 +53,14 @@ function List() {
                     <SectionContent>
                         {loading ? (
                             <div>loading...</div>
+                        ) : products.length <= 0 ? (
+                            <div>Không có sản phẩm</div>
                         ) : (
-                            products.length <= 0
-                                ? <div>Không có sản phẩm</div>
-                                : (
-                                    <ListProduct
-                                        layoutSidebar
-                                        data={products}
-                                        item={ProductItem}
-                                    />
-                                )
+                            <ListProduct
+                                layoutSidebar
+                                data={products}
+                                item={ProductItem}
+                            />
                         )}
                     </SectionContent>
                 </Section>

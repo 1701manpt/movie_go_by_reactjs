@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 import IconImage from '~/components/iconImage'
-import { toggleMenu } from '~/redux/slices/menu'
+import { toggleMenu } from '~/redux/slices/ui'
 import styles from './index.module.scss'
 
 // redux
@@ -10,7 +10,6 @@ import styles from './index.module.scss'
 // components
 
 function Header() {
-
     const dispatch = useDispatch()
     const user = useSelector((state) => state.auth.login.currentUser)
 
@@ -27,6 +26,9 @@ function Header() {
                             src='/icon-admin.png'
                             alt='Store Online Logo'
                             fill={true}
+                            sizes="(max-width: 768px) 100vw,
+                            (max-width: 1200px) 50vw,
+                            33vw"
                         />
                     </div>
                 </Link>
@@ -47,7 +49,12 @@ function Header() {
                         >
                             <IconImage src='/icon-logout.png' />
                         </Link>
-                        <div className={[styles.menu, styles.iconContainer].join(' ')} onClick={handleToggleMenu}>
+                        <div
+                            className={[styles.menu, styles.iconContainer].join(
+                                ' ',
+                            )}
+                            onClick={handleToggleMenu}
+                        >
                             <IconImage src='/icon-menu.png' />
                         </div>
                     </>

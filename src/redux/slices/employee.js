@@ -1,31 +1,52 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { add, getAll, getById } from '~/redux/callApi/product'
+import { getAll, getById, add } from '~/redux/callApi/employee'
 
 const initialState = {
+    personal: {
+        loading: false,
+        info: null,
+        message: null,
+        error: null,
+    },
     list: {
         loading: false,
         data: null,
         message: null,
         error: null,
     },
-    detail: {
-        loading: false,
-        data: null,
-        message: null,
-        error: null,
-    },
     add: {
+        data: null,
         loading: false,
         message: null,
         error: null,
     },
 }
 
-export const productSlice = createSlice({
-    name: 'product',
+export const employeeSlice = createSlice({
+    name: 'employee',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+        // get by id
+        builder.addCase(getById.pending, (state, action) => {
+            state.personal.loading = true
+            state.personal.info = null
+            state.personal.message = null
+            state.personal.error = null
+        })
+        builder.addCase(getById.fulfilled, (state, action) => {
+            state.personal.loading = false
+            state.personal.info = action.payload?.data
+            state.personal.message = action.payload?.message
+            state.personal.error = null
+        })
+        builder.addCase(getById.rejected, (state, action) => {
+            state.personal.loading = false
+            state.personal.info = null
+            state.personal.message = action.payload.message
+            state.personal.error = action.payload.error
+        })
+
         // get all
         builder.addCase(getAll.pending, (state, action) => {
             state.list.loading = true
@@ -46,38 +67,21 @@ export const productSlice = createSlice({
             state.list.error = action.payload.error
         })
 
-        // get by id
-        builder.addCase(getById.pending, (state, action) => {
-            state.detail.loading = true
-            state.detail.data = null
-            state.detail.message = null
-            state.detail.error = null
-        })
-        builder.addCase(getById.fulfilled, (state, action) => {
-            state.detail.loading = false
-            state.detail.data = action.payload.data
-            state.detail.message = action.payload.message
-            state.detail.error = null
-        })
-        builder.addCase(getById.rejected, (state, action) => {
-            state.detail.loading = false
-            state.detail.data = null
-            state.detail.message = action.payload.message
-            state.detail.error = action.payload.error
-        })
-
-        // add product
+        // add
         builder.addCase(add.pending, (state, action) => {
+            state.add.data = null
             state.add.loading = true
             state.add.message = null
             state.add.error = null
         })
         builder.addCase(add.fulfilled, (state, action) => {
+            state.add.data = action.payload.data
             state.add.loading = false
             state.add.message = action.payload.message
             state.add.error = null
         })
         builder.addCase(add.rejected, (state, action) => {
+            state.add.data = null
             state.add.loading = false
             state.add.message = action.payload.message
             state.add.error = action.payload.error
@@ -85,4 +89,4 @@ export const productSlice = createSlice({
     },
 })
 
-export default productSlice.reducer
+export default employeeSlice.reducer

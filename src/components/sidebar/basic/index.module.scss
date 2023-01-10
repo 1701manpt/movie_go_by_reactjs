@@ -10,7 +10,7 @@
     box-shadow: $box-shadow;
     cursor: pointer;
 
-    & + .wrapper {
+    &+.wrapper {
         margin-top: 8px;
     }
 
@@ -20,8 +20,7 @@
 }
 
 .active {
-    border-right: 4px solid $color-path;
-    border-left: 4px solid $color-path;
+    box-shadow: $box-shadow-3d;
     background-image: linear-gradient(135deg, #fdfbfb 10%, #ebedee 100%);
 }
 

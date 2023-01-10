@@ -13,7 +13,6 @@ import Layout from '~/layouts/admin'
 // redux
 
 export default function Admin() {
-
     return (
         <Authentication>
             <Head>

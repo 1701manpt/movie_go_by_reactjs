@@ -1,30 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import axios from '~/axiosHttp'
 import handleError from '~/utils/handleError'
 
-export const getAll = createAsyncThunk(
-    'category/getAll',
-    async (body, { rejectWithValue }) => {
-        try {
-            const res = await axios({
-                method: 'GET',
-                url: `/categories`,
-            })
-
-            return res.data
-        } catch (error) {
-            return handleError({ error, rejectWithValue })
-        }
-    },
-)
-
 export const getById = createAsyncThunk(
-    'category/getById',
-    async (id, { rejectWithValue }) => {
+    'employee/getById',
+    async ({ user, axiosPrivate }, { rejectWithValue }) => {
         try {
-            const res = await axios({
+            const res = await axiosPrivate({
                 method: 'GET',
-                url: `/categories/${id}`,
+                url: `/employees/${user?.id}`,
             })
 
             return res.data
@@ -34,13 +17,13 @@ export const getById = createAsyncThunk(
     },
 )
 
-export const getProductsByCategory = createAsyncThunk(
-    'category/getProductsByCategory',
-    async (id, { rejectWithValue }) => {
+export const getAll = createAsyncThunk(
+    'employee/getAll',
+    async ({ axiosPrivate }, { rejectWithValue }) => {
         try {
-            const res = await axios({
+            const res = await axiosPrivate({
                 method: 'GET',
-                url: `/categories/${id}/products`,
+                url: `/employees`,
             })
 
             return res.data
@@ -51,12 +34,12 @@ export const getProductsByCategory = createAsyncThunk(
 )
 
 export const add = createAsyncThunk(
-    'category/add',
+    'employee/add',
     async ({ data, axiosPrivate }, { rejectWithValue }) => {
         try {
             const res = await axiosPrivate({
                 method: 'POST',
-                url: `/categories`,
+                url: `/employees`,
                 data: data,
             })
 

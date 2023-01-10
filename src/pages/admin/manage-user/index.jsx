@@ -6,24 +6,28 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Authentication from '~/components/authentication/admin'
 import Section, { SectionContent, SectionTitle } from '~/components/section'
-import Table, { fieldUser, TableBody, TableHeader } from '~/components/table'
+import Table, { Cell, fieldUser, Row, TableBody, TableHeader, UserItem } from '~/components/table'
+import useAxiosPrivate from '~/hooks/useAxiosPrivate'
 
 // components
 
 // layouts
 import Layout from '~/layouts/admin'
+import { getAll } from '~/redux/callApi/user'
 
 // redux
 
 export default function ManageUser() {
 
-    // const dispatch = useDispatch()
-    // const productList = useSelector((state) => state.user.list.data)
-    // const loading = useSelector((state) => state.user.list.loading)
+    const dispatch = useDispatch()
+    const axiosPrivate = useAxiosPrivate()
+    const user = useSelector(state => state.auth.login.currentUser)
+    const loading = useSelector(state => state.user.list.loading)
+    const list = useSelector(state => state.user.list.data)
 
-    // useEffect(() => {
-    //     dispatch(getAll())
-    // }, [dispatch])
+    useEffect(() => {
+        dispatch(getAll({ user, axiosPrivate }))
+    }, [dispatch, user, axiosPrivate])
 
     return (
         <Authentication>
@@ -37,21 +41,34 @@ export default function ManageUser() {
             </Head>
             <Layout>
                 <Section>
-                    <SectionTitle>Danh sách người dùng</SectionTitle>
+                    <SectionTitle>Danh sách nhân viên</SectionTitle>
                     <SectionContent>
                         <Table>
                             <TableHeader data={fieldUser} />
                             <TableBody>
-                                {/* {loading
-                                    ? <Row><Cell colSpan={8} center>loading....</Cell></Row>
-                                    : productList.length <= 0
-                                        ? <Row><Cell colSpan={8} center>Không có dữ liệu</Cell></Row>
-                                        : productList.map((product, i) => {
-                                            return (
-                                                <ProductItem data={product} index={i} />
-                                            )
-                                        })
-                                } */}
+                                {loading ? (
+                                    <Row>
+                                        <Cell colSpan={Number(fieldUser.length + 4)} center>
+                                            loading....
+                                        </Cell>
+                                    </Row>
+                                ) : list?.length <= 0 ? (
+                                    <Row>
+                                        <Cell colSpan={Number(fieldUser.length + 4)} center>
+                                            Không có dữ liệu
+                                        </Cell>
+                                    </Row>
+                                ) : (
+                                    list?.map((product, i) => {
+                                        return (
+                                            <UserItem
+                                                data={product}
+                                                key={i}
+                                                index={i}
+                                            />
+                                        )
+                                    })
+                                )}
                             </TableBody>
                         </Table>
                     </SectionContent>

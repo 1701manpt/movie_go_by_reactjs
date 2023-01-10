@@ -1,0 +1,51 @@
+@import '~/styles/import.scss';
+
+.wrapper {
+    position: fixed;
+    padding: 16px;
+    min-width: 240px;
+    border-radius: $border-radius;
+    z-index: 101;
+
+    &.right {
+        right: 16px;
+    }
+
+    &.left {
+        left: 16px;
+    }
+
+    &.top {
+        top: calc($header-height-sm + 16px);
+
+        @include breakpoint(lg) {
+            top: calc($header-height + 16px);
+        }
+    }
+
+    &.bottom {
+        bottom: 16px;
+    }
+
+    &.center {
+        transform: translateX(calc(50vw - 50%));
+    }
+
+    &.middle {
+        transform: translateY(calc(50vh - 50%));
+    }
+
+    &.middle.center {
+        transform: translateY(calc(50vh - 50%)) translateX(calc(50vw - 50%));
+    }
+
+    &.fail {
+        background-color: #F05F57;
+        color: white;
+    }
+
+    &.success {
+        background-color: #002661;
+        color: white;
+    }
+}

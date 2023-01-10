@@ -24,6 +24,9 @@ function CategoryItem({ data }) {
                     src='/image-view-default.png'
                     alt={'Ảnh của danh mục ' + data.image}
                     fill={true}
+                    sizes="(max-width: 768px) 100vw,
+                    (max-width: 1200px) 50vw,
+                    33vw"
                 />
             </div>
             <div className={styles.name}>{data.name}</div>

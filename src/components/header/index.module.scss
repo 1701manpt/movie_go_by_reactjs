@@ -34,7 +34,7 @@
     align-items: center;
     display: none;
 
-    &>.item {
+    & > .item {
         padding: 8px 16px;
         text-transform: uppercase;
         border-radius: $border-radius;
@@ -65,7 +65,7 @@
     justify-content: center;
     align-items: center;
 
-    &+.iconContainer {
+    & + .iconContainer {
         margin-left: 8px;
     }
 }
@@ -103,7 +103,7 @@
     padding: 8px;
     display: none;
 
-    &>.item {
+    & > .item {
         padding: 8px 16px;
         text-transform: uppercase;
         border-radius: $border-radius;
@@ -111,10 +111,9 @@
         background-image: linear-gradient(-135deg, #667eea 10%, #764ba2 100%);
     }
 
-    &>.item+.item {
+    & > .item + .item {
         margin-top: 8px;
     }
-
 
     &.active {
         display: flex;
