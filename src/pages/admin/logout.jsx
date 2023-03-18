@@ -22,7 +22,6 @@ function Logout() {
     const axiosPrivate = useAxiosPrivate()
     const user = useSelector((state) => state.auth.login.currentUser)
 
-
     useEffect(() => {
         const dispatchLogout = setTimeout(() => {
             dispatch(toggleAlert({ status: true }))
@@ -44,9 +43,8 @@ function Logout() {
                 />
                 <link rel='icon' href='/icon-logout.png' />
             </Head>
-            <Alert position={['right', 'top']}>Đang đăng xuất....</Alert>
-            <OnlyHeaderLayout>
-            </OnlyHeaderLayout>
+            <Alert>Đang đăng xuất....</Alert>
+            <OnlyHeaderLayout></OnlyHeaderLayout>
         </Authentication>
     )
 }

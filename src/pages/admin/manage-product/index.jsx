@@ -60,13 +60,23 @@ export default function ManageCustomer() {
                             <TableBody>
                                 {loading ? (
                                     <Row>
-                                        <Cell colSpan={8} center>
+                                        <Cell
+                                            colSpan={Number(
+                                                fieldProduct.length + 4,
+                                            )}
+                                            center
+                                        >
                                             loading....
                                         </Cell>
                                     </Row>
                                 ) : productList?.length <= 0 ? (
                                     <Row>
-                                        <Cell colSpan={8} center>
+                                        <Cell
+                                            colSpan={Number(
+                                                fieldProduct.length + 4,
+                                            )}
+                                            center
+                                        >
                                             Không có dữ liệu
                                         </Cell>
                                     </Row>

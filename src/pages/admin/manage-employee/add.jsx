@@ -1,22 +1,20 @@
-import Head from "next/head"
-import Link from "next/link"
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import Alert from "~/components/alert"
-import Authentication from "~/components/authentication/admin"
-import Button from "~/components/button"
-import Form, { FormAction, FormContent } from "~/components/form"
-import Input from "~/components/form/input"
-import Section, { SectionContent, SectionTitle } from "~/components/section"
-import useAxiosPrivate from "~/hooks/useAxiosPrivate"
-import Layout from "~/layouts/admin"
-import { add } from "~/redux/callApi/employee"
-import { getAll } from "~/redux/callApi/role"
-import { toggleAlert } from "~/redux/slices/ui"
-
+import Head from 'next/head'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import Alert from '~/components/alert'
+import Authentication from '~/components/authentication/admin'
+import Button from '~/components/button'
+import Form, { FormAction, FormContent } from '~/components/form'
+import Input from '~/components/form/input'
+import Section, { SectionContent, SectionTitle } from '~/components/section'
+import useAxiosPrivate from '~/hooks/useAxiosPrivate'
+import Layout from '~/layouts/admin'
+import { add } from '~/redux/callApi/employee'
+import { getAll } from '~/redux/callApi/role'
+import { toggleAlert } from '~/redux/slices/ui'
 
 export default function Add() {
-
     const dispatch = useDispatch()
     const axiosPrivate = useAxiosPrivate()
     const user = useSelector((state) => state.auth.login.currentUser)
@@ -53,7 +51,12 @@ export default function Add() {
                 />
                 <link rel='icon' href='/icon-manage-employee.png' />
             </Head>
-            <Alert position={['center', 'top']} type={data && 'success' || 'fail'}>{message}</Alert>
+            <Alert
+                position={['center', 'top']}
+                type={(data && 'success') || 'fail'}
+            >
+                {message}
+            </Alert>
             <Layout>
                 <Section>
                     <SectionTitle>Thông tin nhân viên mới</SectionTitle>
@@ -129,35 +132,29 @@ export default function Add() {
                                         onChangeState(e)
                                     }}
                                 >
-                                    {
-                                        !roleList
-                                            ? <option value={''} defaultValue>
-                                                Không có dữ liệu
+                                    {!roleList ? (
+                                        <option value={''} defaultValue>
+                                            Không có dữ liệu
+                                        </option>
+                                    ) : (
+                                        <>
+                                            <option value={''} defaultValue>
+                                                Chọn chức vụ
                                             </option>
-
-                                            : (
-                                                <>
-                                                    <option value={''} defaultValue>
-                                                        Chọn chức vụ
-                                                    </option>
-                                                    {roleList?.map((item, i) => (
-                                                        <option key={i} value={item.id}>
-                                                            {item.name}
-                                                        </option>
-                                                    ))}
-                                                </>
-                                            )
-                                    }
+                                            {roleList?.map((item, i) => (
+                                                <option key={i} value={item.id}>
+                                                    {item.name}
+                                                </option>
+                                            ))}
+                                        </>
+                                    )}
                                 </select>
                                 <Link href='/admin/manage-category/add'>
                                     <button>Thêm mới</button>
                                 </Link>
                             </FormContent>
                             <FormAction>
-                                <Button
-                                    type='submit'
-                                    onClick={handleAdd}
-                                >
+                                <Button type='submit' onClick={handleAdd}>
                                     Thêm mới nhân viên
                                 </Button>
                             </FormAction>

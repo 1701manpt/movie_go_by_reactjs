@@ -15,6 +15,14 @@
     }
 }
 
+.image {
+    position: relative;
+    object-fit: cover;
+    width: 100%;
+    height: 100px;
+    border-radius: 50%;
+}
+
 .name {
     margin: 8px 0;
     display: -webkit-box;

@@ -4,11 +4,30 @@ import { useEffect, useState } from 'react'
 import IconImage from '~/components/iconImage'
 import styles from './index.module.scss'
 
-export const fieldProduct = ['Id', 'Ảnh đại diện', 'Tên sản phẩm', 'Giá bán', 'Danh mục']
+export const fieldProduct = [
+    'Id',
+    'Ảnh đại diện',
+    'Tên sản phẩm',
+    'Giá bán',
+    'Danh mục',
+]
 export const fieldUser = ['Id', 'Tài khoản', 'Email', 'Trạng thái', 'Ngày tạo']
 export const fieldCategory = ['Id', 'Ảnh đại diện', 'Tên danh mục']
-export const fieldEmployee = ['Id', 'Họ và tên', 'Số điện thoại', 'Địa chỉ', 'Chức vụ', 'Tài khoản']
-export const fieldCustomer = ['Id', 'Họ và tên', 'Số điện thoại', 'Địa chỉ', 'Tài khoản']
+export const fieldEmployee = [
+    'Id',
+    'Họ và tên',
+    'Số điện thoại',
+    'Địa chỉ',
+    'Chức vụ',
+    'Tài khoản',
+]
+export const fieldCustomer = [
+    'Id',
+    'Họ và tên',
+    'Số điện thoại',
+    'Địa chỉ',
+    'Tài khoản',
+]
 
 export const ProductItem = ({ data: product, index }) => {
     const [highLight, setHighLight] = useState(false)
@@ -36,9 +55,9 @@ export const ProductItem = ({ data: product, index }) => {
                             src='/image-view-default.png'
                             alt={product.name}
                             fill={true}
-                            sizes="(max-width: 768px) 100vw,
+                            sizes='(max-width: 768px) 100vw,
                             (max-width: 1200px) 50vw,
-                            33vw"
+                            33vw'
                             style={{ objectFit: 'contain' }}
                         />
                     </div>
@@ -92,9 +111,9 @@ export const CategoryItem = ({ data, index }) => {
                             src='/image-view-default.png'
                             alt={data.name}
                             fill={true}
-                            sizes="(max-width: 768px) 100vw,
+                            sizes='(max-width: 768px) 100vw,
                             (max-width: 1200px) 50vw,
-                            33vw"
+                            33vw'
                             style={{ objectFit: 'contain' }}
                         />
                     </div>
@@ -134,21 +153,11 @@ export const EmployeeItem = ({ data, index }) => {
                 {index + 1}
             </Cell>
             <Cell center>{data.id}</Cell>
-            <Cell center>
-                {data.fullName}
-            </Cell>
-            <Cell center>
-                {data.phone}
-            </Cell>
-            <Cell center>
-                {data.address}
-            </Cell>
-            <Cell center>
-                {data.role.name}
-            </Cell>
-            <Cell center>
-                {data.user.account}
-            </Cell>
+            <Cell center>{data.fullName}</Cell>
+            <Cell center>{data.phone}</Cell>
+            <Cell center>{data.address}</Cell>
+            <Cell center>{data.role.name}</Cell>
+            <Cell center>{data.user.account}</Cell>
             <Cell center action>
                 <IconImage src='/icon-delete.png' />
             </Cell>
@@ -177,18 +186,10 @@ export const CustomerItem = ({ data, index }) => {
                 {index + 1}
             </Cell>
             <Cell center>{data.id}</Cell>
-            <Cell center>
-                {data.fullName}
-            </Cell>
-            <Cell center>
-                {data.phone}
-            </Cell>
-            <Cell center>
-                {data.address}
-            </Cell>
-            <Cell center>
-                {data.user.account}
-            </Cell>
+            <Cell center>{data.fullName}</Cell>
+            <Cell center>{data.phone}</Cell>
+            <Cell center>{data.address}</Cell>
+            <Cell center>{data.user.account}</Cell>
             <Cell center action>
                 <IconImage src='/icon-delete.png' />
             </Cell>
@@ -217,15 +218,9 @@ export const UserItem = ({ data, index }) => {
                 {index + 1}
             </Cell>
             <Cell center>{data.id}</Cell>
-            <Cell center>
-                {data.account}
-            </Cell>
-            <Cell center>
-                {data.email}
-            </Cell>
-            <Cell center>
-                {data.userStatus.name}
-            </Cell>
+            <Cell center>{data.account}</Cell>
+            <Cell center>{data.email}</Cell>
+            <Cell center>{data.userStatus.name}</Cell>
             <Cell center>
                 {moment(data.createdAt).format('DD-MM-YYYY HH:mm')}
             </Cell>

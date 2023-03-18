@@ -9,7 +9,7 @@
     box-shadow: $box-shadow;
     border-radius: $border-radius;
 
-    &+.wrapper {
+    & + .wrapper {
         margin-top: 32px;
     }
 }
@@ -21,7 +21,7 @@
     border-bottom: 1px solid #fdfbfb;
     color: $color-title;
 
-    &+.content {
+    & + .content {
         margin-top: 16px;
     }
 }

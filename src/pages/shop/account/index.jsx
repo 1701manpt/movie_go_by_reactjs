@@ -16,7 +16,7 @@ import BasicItem, { SidebarData } from '~/components/sidebar/basic'
 // hooks
 import Section, { SectionTitle } from '~/components/section'
 import useAxiosPrivate from '~/hooks/useAxiosPrivate'
-import Table, { Cell, Row } from '~/components/table'
+import Table, { Cell, Row, TableBody } from '~/components/table'
 
 function Account() {
     const dispatch = useDispatch()
@@ -48,38 +48,40 @@ function Account() {
                     ) : (
                         personal && (
                             <Table>
-                                <Row>
-                                    <Cell bold>Họ và tên</Cell>
-                                    <Cell>{personal.fullName}</Cell>
-                                </Row>
-                                <Row>
-                                    <Cell bold>Địa chỉ</Cell>
-                                    <Cell>{personal.address}</Cell>
-                                </Row>
-                                <Row>
-                                    <Cell bold>Số điện thoại</Cell>
-                                    <Cell>{personal.phone}</Cell>
-                                </Row>
-                                <Row>
-                                    <Cell bold>Tên tài khoản</Cell>
-                                    <Cell>{personal.user.account}</Cell>
-                                </Row>
-                                <Row>
-                                    <Cell bold>Email</Cell>
-                                    <Cell>{personal.user.email}</Cell>
-                                </Row>
-                                <Row>
-                                    <Cell bold>Trạng thái người dùng</Cell>
-                                    <Cell>{personal.user.userStatus.name}</Cell>
-                                </Row>
-                                <Row>
-                                    <Cell bold>Ngày đăng ký</Cell>
-                                    <Cell>
-                                        {moment(new Date(personal.user.createdAt)).format(
-                                            'DD-MM-YYYY | HH:mm',
-                                        )}
-                                    </Cell>
-                                </Row>
+                                <TableBody>
+                                    <Row>
+                                        <Cell bold>Họ và tên</Cell>
+                                        <Cell>{personal.fullName}</Cell>
+                                    </Row>
+                                    <Row>
+                                        <Cell bold>Địa chỉ</Cell>
+                                        <Cell>{personal.address}</Cell>
+                                    </Row>
+                                    <Row>
+                                        <Cell bold>Số điện thoại</Cell>
+                                        <Cell>{personal.phone}</Cell>
+                                    </Row>
+                                    <Row>
+                                        <Cell bold>Tên tài khoản</Cell>
+                                        <Cell>{personal.user.account}</Cell>
+                                    </Row>
+                                    <Row>
+                                        <Cell bold>Email</Cell>
+                                        <Cell>{personal.user.email}</Cell>
+                                    </Row>
+                                    <Row>
+                                        <Cell bold>Trạng thái người dùng</Cell>
+                                        <Cell>{personal.user.userStatus.name}</Cell>
+                                    </Row>
+                                    <Row>
+                                        <Cell bold>Ngày đăng ký</Cell>
+                                        <Cell>
+                                            {moment(
+                                                new Date(personal.user.createdAt),
+                                            ).format('DD-MM-YYYY | HH:mm')}
+                                        </Cell>
+                                    </Row>
+                                </TableBody>
                             </Table>
                         )
                     )}

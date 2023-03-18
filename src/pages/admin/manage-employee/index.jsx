@@ -8,7 +8,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import Authentication from '~/components/authentication/admin'
 import Button from '~/components/button'
 import Section, { SectionContent, SectionTitle } from '~/components/section'
-import Table, { Cell, EmployeeItem, fieldEmployee, Row, TableBody, TableHeader } from '~/components/table'
+import Table, {
+    Cell,
+    EmployeeItem,
+    fieldEmployee,
+    Row,
+    TableBody,
+    TableHeader,
+} from '~/components/table'
 import useAxiosPrivate from '~/hooks/useAxiosPrivate'
 
 // components
@@ -20,12 +27,11 @@ import { getAll } from '~/redux/callApi/employee'
 // redux
 
 export default function ManageCustomer() {
-
     const dispatch = useDispatch()
     const axiosPrivate = useAxiosPrivate()
-    const user = useSelector(state => state.auth.login.currentUser)
-    const loading = useSelector(state => state.employee.list.loading)
-    const list = useSelector(state => state.employee.list.data)
+    const user = useSelector((state) => state.auth.login.currentUser)
+    const loading = useSelector((state) => state.employee.list?.loading)
+    const list = useSelector((state) => state.employee.list?.data)
 
     useEffect(() => {
         dispatch(getAll({ user, axiosPrivate }))
@@ -57,13 +63,23 @@ export default function ManageCustomer() {
                             <TableBody>
                                 {loading ? (
                                     <Row>
-                                        <Cell colSpan={Number(fieldEmployee.length + 4)} center>
+                                        <Cell
+                                            colSpan={Number(
+                                                fieldEmployee.length + 4,
+                                            )}
+                                            center
+                                        >
                                             loading....
                                         </Cell>
                                     </Row>
                                 ) : list?.length <= 0 ? (
                                     <Row>
-                                        <Cell colSpan={Number(fieldEmployee.length + 4)} center>
+                                        <Cell
+                                            colSpan={Number(
+                                                fieldEmployee.length + 4,
+                                            )}
+                                            center
+                                        >
                                             Không có dữ liệu
                                         </Cell>
                                     </Row>

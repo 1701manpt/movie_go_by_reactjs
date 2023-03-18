@@ -10,9 +10,9 @@ const ImageLoader = ({ href, alt }) => {
                 alt={alt}
                 src='/image-view-default.png'
                 fill={true}
-                sizes="(max-width: 768px) 100vw,
+                sizes='(max-width: 768px) 100vw,
                 (max-width: 1200px) 50vw,
-                33vw"
+                33vw'
             />
         </div>
     )

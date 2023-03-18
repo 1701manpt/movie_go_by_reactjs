@@ -6,7 +6,14 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Authentication from '~/components/authentication/admin'
 import Section, { SectionContent, SectionTitle } from '~/components/section'
-import Table, { Cell, CustomerItem, fieldCustomer, Row, TableBody, TableHeader } from '~/components/table'
+import Table, {
+    Cell,
+    CustomerItem,
+    fieldCustomer,
+    Row,
+    TableBody,
+    TableHeader,
+} from '~/components/table'
 import useAxiosPrivate from '~/hooks/useAxiosPrivate'
 
 // components
@@ -18,12 +25,11 @@ import { getAll } from '~/redux/callApi/customer'
 // redux
 
 export default function ManageCustomer() {
-
     const dispatch = useDispatch()
     const axiosPrivate = useAxiosPrivate()
-    const user = useSelector(state => state.auth.login.currentUser)
-    const loading = useSelector(state => state.customer.list.loading)
-    const list = useSelector(state => state.customer.list.data)
+    const user = useSelector((state) => state.auth.login.currentUser)
+    const loading = useSelector((state) => state.customer.list.loading)
+    const list = useSelector((state) => state.customer.list.data)
 
     useEffect(() => {
         dispatch(getAll({ user, axiosPrivate }))
@@ -41,20 +47,30 @@ export default function ManageCustomer() {
             </Head>
             <Layout>
                 <Section>
-                    <SectionTitle>Danh sách nhân viên</SectionTitle>
+                    <SectionTitle>Danh sách khách hàng</SectionTitle>
                     <SectionContent>
                         <Table>
                             <TableHeader data={fieldCustomer} />
                             <TableBody>
                                 {loading ? (
                                     <Row>
-                                        <Cell colSpan={Number(fieldCustomer.length + 4)} center>
+                                        <Cell
+                                            colSpan={Number(
+                                                fieldCustomer.length + 4,
+                                            )}
+                                            center
+                                        >
                                             loading....
                                         </Cell>
                                     </Row>
                                 ) : list?.length <= 0 ? (
                                     <Row>
-                                        <Cell colSpan={Number(fieldCustomer.length + 4)} center>
+                                        <Cell
+                                            colSpan={Number(
+                                                fieldCustomer.length + 4,
+                                            )}
+                                            center
+                                        >
                                             Không có dữ liệu
                                         </Cell>
                                     </Row>

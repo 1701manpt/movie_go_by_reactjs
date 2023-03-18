@@ -26,9 +26,9 @@ function Header() {
                             src='/icon-admin.png'
                             alt='Store Online Logo'
                             fill={true}
-                            sizes="(max-width: 768px) 100vw,
+                            sizes='(max-width: 768px) 100vw,
                             (max-width: 1200px) 50vw,
-                            33vw"
+                            33vw'
                         />
                     </div>
                 </Link>

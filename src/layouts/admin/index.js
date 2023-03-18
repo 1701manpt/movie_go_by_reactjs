@@ -5,7 +5,12 @@ import BasicItem from '~/components/sidebar/basic'
 // styles
 import styles from './index.module.scss'
 
-function AdminLayout({ children, title, data = SidebarData, item = BasicItem }) {
+function AdminLayout({
+    children,
+    title,
+    data = SidebarData,
+    item = BasicItem,
+}) {
     return (
         <div className={styles.root}>
             <div className={styles.container}>

@@ -43,9 +43,8 @@ function Logout() {
                 />
                 <link rel='icon' href='/icon-logout.png' />
             </Head>
-            <Alert position={['right', 'top']}>Đang đăng xuất....</Alert>
-            <Layout>
-            </Layout>
+            <Alert>Đang đăng xuất....</Alert>
+            <Layout></Layout>
         </Authentication>
     )
 }

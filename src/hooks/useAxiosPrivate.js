@@ -8,7 +8,6 @@ const useAxiosPrivate = () => {
     const user = useSelector((state) => state.auth.login.currentUser)
 
     useEffect(() => {
-
         const requestInterCept = axiosPrivate.interceptors.request.use(
             (config) => {
                 if (!config.headers['token']) {

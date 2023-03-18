@@ -28,7 +28,11 @@ export default function Admin() {
             <Layout>
                 <Section>
                     <SectionContent>
-                        <List data={StatisticData} item={StatisticItem} column={4} />
+                        <List
+                            data={StatisticData}
+                            item={StatisticItem}
+                            column={4}
+                        />
                     </SectionContent>
                 </Section>
             </Layout>

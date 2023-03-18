@@ -68,7 +68,11 @@ function Login() {
                 />
                 <link rel='icon' href='/icon-login.png' />
             </Head>
-            <Alert position={['right', 'top']} type={user && 'success' || 'fail'}>{message}</Alert>
+            <Alert
+                type={(user && 'success') || 'fail'}
+            >
+                {message}
+            </Alert>
             <OnlyHeaderLayout>
                 <Form>
                     <FormTitle>Đăng nhập</FormTitle>

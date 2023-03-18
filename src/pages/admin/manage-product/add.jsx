@@ -14,30 +14,34 @@ import { getAll } from '~/redux/callApi/category'
 import { add } from '~/redux/callApi/product'
 import { toggleAlert } from '~/redux/slices/ui'
 
-export default function Add() {
+export default function Add ()
+{
     const dispatch = useDispatch()
     const axiosPrivate = useAxiosPrivate()
-    const categories = useSelector((state) => state.category.list.data)
-    const validation = useSelector((state) => state.product.add.error)
-    const message = useSelector((state) => state.product.add.message)
+    const categories = useSelector( ( state ) => state.category.list.data )
+    const validation = useSelector( ( state ) => state.product.add.error )
+    const message = useSelector( ( state ) => state.product.add.message )
 
-    const [state, setState] = useState({})
+    const [ state, setState ] = useState( {} )
 
-    const onChangeState = (e) => {
-        setState({
+    const onChangeState = ( e ) =>
+    {
+        setState( {
             ...state,
-            [e.target.name]: e.target.value,
-        })
+            [ e.target.name ]: e.target.value,
+        } )
     }
 
-    const handleAddProduct = () => {
-        dispatch(toggleAlert({ status: true }))
-        dispatch(add({ data: state, axiosPrivate }))
+    const handleAddProduct = () =>
+    {
+        dispatch( toggleAlert( { status: true } ) )
+        dispatch( add( { data: state, axiosPrivate } ) )
     }
 
-    useEffect(() => {
-        dispatch(getAll())
-    }, [dispatch])
+    useEffect( () =>
+    {
+        dispatch( getAll() )
+    }, [ dispatch ] )
 
     return (
         <Authentication>
@@ -59,63 +63,65 @@ export default function Add() {
                                     label='Tên sản phẩm'
                                     type='text'
                                     name='name'
-                                    onChange={(e) => {
-                                        onChangeState(e)
-                                    }}
-                                    error={validation}
+                                    onChange={ ( e ) =>
+                                    {
+                                        onChangeState( e )
+                                    } }
+                                    error={ validation }
                                 />
                                 <Input
                                     label='Ảnh đại diện'
                                     type='text'
                                     name='avatar'
-                                    onChange={(e) => {
-                                        onChangeState(e)
-                                    }}
-                                    error={validation}
+                                    onChange={ ( e ) =>
+                                    {
+                                        onChangeState( e )
+                                    } }
+                                    error={ validation }
                                 />
                                 <Input
                                     label='Giá bán'
                                     type='text'
                                     name='price'
-                                    onChange={(e) => {
-                                        onChangeState(e)
-                                    }}
-                                    error={validation}
+                                    onChange={ ( e ) =>
+                                    {
+                                        onChangeState( e )
+                                    } }
+                                    error={ validation }
                                 />
                                 <Input
                                     label='Mô tả'
                                     type='text'
                                     name='description'
-                                    onChange={(e) => {
-                                        onChangeState(e)
-                                    }}
-                                    error={validation}
+                                    onChange={ ( e ) =>
+                                    {
+                                        onChangeState( e )
+                                    } }
+                                    error={ validation }
                                 />
                                 <select
                                     name='categoryId'
-                                    onChange={(e) => {
-                                        onChangeState(e)
-                                    }}
-                                >
+                                    onChange={ ( e ) =>
                                     {
-                                        !categories
-                                            ? <option value={''} defaultValue>
-                                                Không có dữ liệu
+                                        onChangeState( e )
+                                    } }
+                                >
+                                    { !categories ? (
+                                        <option value={ '' } defaultValue>
+                                            Không có dữ liệu
+                                        </option>
+                                    ) : (
+                                        <>
+                                            <option value={ '' } defaultValue>
+                                                Chọn danh mục
                                             </option>
-
-                                            : (
-                                                <>
-                                                    <option value={''} defaultValue>
-                                                        Chọn danh mục
-                                                    </option>
-                                                    {categories?.map((item, i) => (
-                                                        <option key={i} value={item.id}>
-                                                            {item.name}
-                                                        </option>
-                                                    ))}
-                                                </>
-                                            )
-                                    }
+                                            { categories?.map( ( item, i ) => (
+                                                <option key={ i } value={ item.id }>
+                                                    { item.name }
+                                                </option>
+                                            ) ) }
+                                        </>
+                                    ) }
                                 </select>
                                 <Link href='/admin/manage-category/add'>
                                     <button>Thêm mới</button>
@@ -124,7 +130,7 @@ export default function Add() {
                             <FormAction>
                                 <Button
                                     type='submit'
-                                    onClick={handleAddProduct}
+                                    onClick={ handleAddProduct }
                                 >
                                     Thêm mới sản phẩm
                                 </Button>
@@ -132,7 +138,7 @@ export default function Add() {
                         </Form>
                     </SectionContent>
                 </Section>
-                <Alert>{message}</Alert>
+                <Alert>{ message }</Alert>
             </Layout>
         </Authentication>
     )

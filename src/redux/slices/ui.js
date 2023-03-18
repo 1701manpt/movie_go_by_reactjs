@@ -6,7 +6,7 @@ const initialState = {
     },
     alert: {
         status: false,
-    }
+    },
 }
 
 export const uiSlice = createSlice({

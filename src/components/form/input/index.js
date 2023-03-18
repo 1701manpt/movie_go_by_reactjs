@@ -1,13 +1,15 @@
+import { useEffect, useState } from 'react'
 import styles from './index.module.scss'
 
 function Input({ label, error = [], name, ...args }) {
     // làm như này hiệu suất kém
     let message
-    error instanceof Array && error?.forEach((e, i) => {
-        if (e.param === name) {
-            message = e.msg
-        }
-    })
+    error instanceof Array &&
+        error?.forEach((e, i) => {
+            if (e.param === name) {
+                message = e.msg
+            }
+        })
 
     return (
         <div className={styles.wrapper}>

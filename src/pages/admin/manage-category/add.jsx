@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Alert from '~/components/alert'
 import Authentication from '~/components/authentication/admin'
 import Button from '~/components/button'
 import Form, { FormAction, FormContent, FormResult } from '~/components/form'
@@ -9,15 +10,16 @@ import Section, { SectionContent, SectionTitle } from '~/components/section'
 import useAxiosPrivate from '~/hooks/useAxiosPrivate'
 import Layout from '~/layouts/admin'
 import { add } from '~/redux/callApi/category'
+import { toggleAlert } from '~/redux/slices/ui'
 
 export default function Add() {
     const dispatch = useDispatch()
     const axiosPrivate = useAxiosPrivate()
+
     const validation = useSelector((state) => state.category.add.error)
-    // const message = useSelector((state) => state.category.add.message)
+    const message = useSelector((state) => state.category.add.message)
 
     const [state, setState] = useState({})
-    const [showResult, setShowResult] = useState(false)
     const onChangeState = (e) => {
         setState({
             ...state,
@@ -26,8 +28,8 @@ export default function Add() {
     }
 
     const handleAddCategory = () => {
+        dispatch(toggleAlert({ status: true }))
         dispatch(add({ data: state, axiosPrivate }))
-        setShowResult(true)
     }
 
     return (
@@ -40,11 +42,11 @@ export default function Add() {
                 />
                 <link rel='icon' href='/icon-manage-category.png' />
             </Head>
+            <Alert>{message}</Alert>
             <Layout>
                 <Section>
                     <SectionTitle>Thông tin danh mục mới</SectionTitle>
                     <SectionContent>
-                        {/* {showResult && <FormResult>{message}</FormResult>} */}
                         <Form>
                             <FormContent>
                                 <Input

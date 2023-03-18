@@ -7,7 +7,7 @@ const initialState = {
         data: null,
         message: null,
         error: null,
-    }
+    },
 }
 
 export const roleSlice = createSlice({

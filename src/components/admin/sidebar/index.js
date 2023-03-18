@@ -69,7 +69,9 @@ function Sidebar({ data, title, item: Item }) {
     }
 
     return (
-        <div className={[styles.wrapper, menuStatus && styles.active].join(' ')}>
+        <div
+            className={[styles.wrapper, menuStatus && styles.active].join(' ')}
+        >
             {title && <div className={styles.title}>{title}</div>}
             <aside className={styles.content}>
                 {data &&
@@ -80,7 +82,8 @@ function Sidebar({ data, title, item: Item }) {
                                 key={index}
                                 data={item}
                                 active={
-                                    router.pathname.split('/')[2] == item.path.split('/')[2] && true
+                                    router.pathname.split('/')[2] ==
+                                        item.path.split('/')[2] && true
                                 }
                             />
                         )
